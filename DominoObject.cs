@@ -42,6 +42,8 @@ public partial class DominoObject : StaticBody3D
 
     public List<Node3D> domino_list = new List<Node3D>();
 
+    public int total_rotate = 0;
+
 
     // signal to emit the number value of the domino face that was hit
     [Signal]
@@ -449,7 +451,12 @@ public partial class DominoObject : StaticBody3D
             if(currentXDegrees > -90)
             {
                 int rotation = currentXDegrees -1;
-                RotateX(Mathf.DegToRad(-2f));
+                RotateX(Mathf.DegToRad(-1f));
+                total_rotate --;
+            }
+            if (total_rotate < -90)
+            {
+                falling = false;
             }
         }
         currentXDegrees = (int)Mathf.RadToDeg(Rotation.X);
