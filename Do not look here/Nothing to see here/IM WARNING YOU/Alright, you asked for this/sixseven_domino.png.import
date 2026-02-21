@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d3ej828ccumix"
-path.s3tc="res://.godot/imported/sevn.jpg-76f0e9a9c5c8c5b03aa4994916595ed2.s3tc.ctex"
+uid="uid://cppprlxfmwogu"
+path.s3tc="res://.godot/imported/sixseven_domino.png-cab8f8527fec110a80615c3fab71bcc7.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Do not look here/Nothing to see here/IM WARNING YOU/Alright, you asked for this/sevn.jpg"
-dest_files=["res://.godot/imported/sevn.jpg-76f0e9a9c5c8c5b03aa4994916595ed2.s3tc.ctex"]
+source_file="res://Do not look here/Nothing to see here/IM WARNING YOU/Alright, you asked for this/sixseven_domino.png"
+dest_files=["res://.godot/imported/sixseven_domino.png-cab8f8527fec110a80615c3fab71bcc7.s3tc.ctex"]
 
 [params]
 
