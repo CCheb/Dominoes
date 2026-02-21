@@ -29,8 +29,16 @@ size = Vector3(1, 1, 0.25)
 [sub_resource type="BoxShape3D" id="BoxShape3D_08fip"]
 size = Vector3(1, 1, 0.25)
 
-[node name="StaticBody3D" type="StaticBody3D" unique_id=802920438 groups=["DOMINO"]]
+[sub_resource type="BoxShape3D" id="BoxShape3D_3kqfc"]
+size = Vector3(1, 1, 0.35)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_m5jtm"]
+size = Vector3(1, 1, 0.35)
+
+[node name="StaticBody3D" type="StaticBody3D" unique_id=802920438 node_paths=PackedStringArray("top_area", "bottom_area") groups=["DOMINO"]]
 script = ExtResource("1_08fip")
+top_area = NodePath("TopArea")
+bottom_area = NodePath("BottomArea")
 
 [node name="Collision_Bottom" type="CollisionShape3D" parent="." unique_id=1636793392]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
@@ -102,3 +110,15 @@ transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 
 [node name="06" parent="." unique_id=2032164971 instance=ExtResource("22_j1tvy")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="TopArea" type="Area3D" parent="." unique_id=61409751]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TopArea" unique_id=221846644]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = SubResource("BoxShape3D_3kqfc")
+
+[node name="BottomArea" type="Area3D" parent="." unique_id=2091568631]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BottomArea" unique_id=578215238]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_m5jtm")

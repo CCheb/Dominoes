@@ -51,6 +51,7 @@ public partial class DominoLine : Node3D
         // position behind previous, along its -Z direction
         Vector3 dir = prev.GlobalTransform.Basis.Z.Normalized();
         domino.GlobalPosition = prev.GlobalPosition - dir * spacing;
+
       }
 
       dominoes.Add(domino);
@@ -70,7 +71,11 @@ public partial class DominoLine : Node3D
       int inputInt = face1 * 10 + face2;
       // call domino's method to set its faces
       domino.Call("domino_type", inputInt);
+
+      // connnect signal from domino to this line to keep track of how many dominoes are left
+      domino.Connect("DominoHit", new Callable(this, "OnDominoHit"));
     }
+
 
     dominoes[0].Call("domino_die");
   }
