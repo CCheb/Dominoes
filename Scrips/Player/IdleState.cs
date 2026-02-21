@@ -1,14 +1,17 @@
 using Godot;
 using System;
+using System.ComponentModel;
 
 public partial class IdleState : State
 {
     [Export] private CameraController cameraController;
+    [Export] private Crosshair crosshair;
     public override void Enter(State prevState)
     {
         // If prevState == Shooting: reset back to idle here
         GD.Print("Entered Idle State!");
         cameraController.RequestCameraZoom(75.0f);
+        crosshair.RequestReset();
     }
 
     public override void Exit()

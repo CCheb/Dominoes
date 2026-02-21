@@ -4,11 +4,13 @@ using System;
 public partial class AimingState : State
 {
     [Export] private CameraController cameraController;
+    [Export] private Crosshair crosshair;
     public override void Enter(State prevState)
     {
         // If prevState == Shooting: reset back to idle here
         GD.Print("Entered Aiming State");
         cameraController.RequestCameraZoom(30.0f);
+        crosshair.RequestPatternLoad(SinePatterns.Patterns.DampedWave);
     }
 
     public override void Exit()

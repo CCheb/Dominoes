@@ -33,4 +33,4 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.208)
 
 [node name="Player" parent="." unique_id=388203353 instance=ExtResource("2_acvas")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.5891101)
+transform = Transform3D(1, 0, 0, 0, 0.99499995, 0.09987548, 0, -0.09987548, 0.99499995, 0, 0, 0)
