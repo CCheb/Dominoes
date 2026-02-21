@@ -19,7 +19,7 @@ public partial class CameraController : Node3D
 
 	public void RequestCameraZoom(float desiredFov)
 	{
-		if(desiredFov >= 30.0f && desiredFov <= 75.0f)
+		if(desiredFov >= 9.0f && desiredFov <= 75.0f)
 			targetFov = desiredFov;
 	}
 
@@ -28,5 +28,10 @@ public partial class CameraController : Node3D
 	{
 		currentFov = Mathf.Lerp(currentFov, targetFov, 7.0f*(float)delta);
 		camera.Fov = currentFov;
+	}
+
+	public Camera3D GetCamera()
+	{
+		return camera;
 	}
 }

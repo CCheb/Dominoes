@@ -22,6 +22,7 @@ public partial class PlayerStateMachine : Node
             if (child is State state)
             {
                 states[child.Name] = state;
+                state.stateName = child.Name;
                 ConnectStateTransitionSignal(state);
             }
             else

@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://c5t4i1vnlrwx2"]
+
+[ext_resource type="Script" uid="uid://bu24dr8knlfgk" path="res://Scrips/Player/TestDecal.cs" id="1_wqful"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1yiuw"]
+albedo_color = Color(0.7996229, 0, 0.084064834, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wqful"]
+material = SubResource("StandardMaterial3D_1yiuw")
+size = Vector3(0.05, 0.05, 0.05)
+
+[node name="TestDecal" type="Node3D" unique_id=89611240]
+script = ExtResource("1_wqful")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1971851441]
+mesh = SubResource("BoxMesh_wqful")
