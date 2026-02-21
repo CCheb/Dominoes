@@ -1,6 +1,8 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Numerics;
+using Vector3 = Godot.Vector3;
 
 public partial class DominoLine : Node3D
 {
@@ -23,6 +25,8 @@ public partial class DominoLine : Node3D
     base._Ready();
     // set start position to current position of the line
     startPosition = GlobalPosition;
+    // set dominoes remaining to max dominoes at the start
+    dominoesRemaining = maxDominoes;
     // spawn dominoes
     for (int i = 0; i < maxDominoes; i++)
     {
@@ -77,6 +81,61 @@ public partial class DominoLine : Node3D
     }
 
 
-    dominoes[0].Call("domino_die");
+    // TEST DOMINO HIT
+    OnDominoHit(3);
   }
+
+  public async void OnDominoHit(int value)
+  {
+    // value recieved is the number of dominoes that will fall
+    // so from the start of the line, call domino_die for value amount of dominoes
+    // BEFORE THIS, we need to get positions of all dominoes so that the next dominoes in line can fill in
+    // make an array of the positions and rotations of the dominoes that will fall
+    Vector3[] positions = new Vector3[dominoesRemaining];
+    Vector3[] rotations = new Vector3[dominoesRemaining];
+    for (int i = 0; i < dominoesRemaining; i++)
+    {
+      positions[i] = dominoes[i].GlobalPosition;
+      rotations[i] = dominoes[i].GlobalRotation;
+    }
+    // call kill_dominoes function
+    KillDominoes(value);
+    // wait a short time to allow dominoes to fall before filling in the line
+    await ToSignal(GetTree().CreateTimer(5f), "timeout");
+    // fill in the line with the next dominoes in line
+    FillInLine(positions, rotations, value);
+  }
+
+  public async void KillDominoes(int value)
+  {
+    // call domino_die for value amount of dominoes
+    for (int i = 0; i < value; i++)
+    {
+      GD.Print("Killing domino " + i);
+      dominoes[i].Call("domino_die");
+      dominoesRemaining--;
+      GD.Print("Dominoes remaining: " + dominoesRemaining);
+      // wait a short time before killing the next domino to create a chain reaction effect
+      await ToSignal(GetTree().CreateTimer(1f), "timeout");
+      // remove from list
+      Node3D temp = dominoes[i];
+      dominoes.RemoveAt(0);
+      temp.QueueFree();
+    }
+  }
+
+  public void FillInLine(Vector3[] positions, Vector3[] rotations, int value)
+  {
+    GD.Print("Filling in line with " + value + " dominoes");
+    // starting from the beginning of the remaining line, move each domino to the position and rotation of the domino that just fell
+    for (int i = 0; i < dominoesRemaining; i++)
+    {
+      GD.Print("Moving domino " + i + " to position " + positions[i] + " and rotation " + rotations[i]);
+      dominoes[i].GlobalPosition = positions[i];
+      dominoes[i].GlobalRotation = rotations[i];
+    }
+  }
+
 }
+
+
