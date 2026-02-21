@@ -1,24 +1,80 @@
-[gd_scene load_steps=5 format=3 uid="uid://b61mp7mfenkv8"]
+[gd_scene load_steps=19 format=3 uid="uid://b61mp7mfenkv8"]
 
 [ext_resource type="Script" uid="uid://cs4gw4e2ditre" path="res://DominoObject.cs" id="1_08fip"]
+[ext_resource type="PackedScene" uid="uid://d2r1wx671oayr" path="res://Assets/dominoesPack/12.blend" id="2_oqgk8"]
+[ext_resource type="PackedScene" uid="uid://ds87us8kiryrt" path="res://Assets/dominoesPack/13.blend" id="3_efxmq"]
+[ext_resource type="PackedScene" uid="uid://q5ascfc4rq6f" path="res://Assets/dominoesPack/14.blend" id="4_0qdc8"]
+[ext_resource type="PackedScene" uid="uid://dcs30275jejg6" path="res://Assets/dominoesPack/15.blend" id="5_5xod7"]
+[ext_resource type="PackedScene" uid="uid://dalotccngqbjb" path="res://Assets/dominoesPack/16.blend" id="6_tiwaa"]
+[ext_resource type="PackedScene" uid="uid://bm61duirdnjv2" path="res://Assets/dominoesPack/23.blend" id="7_k8qxj"]
+[ext_resource type="PackedScene" uid="uid://bm8anxcaywxcv" path="res://Assets/dominoesPack/24.blend" id="8_3kqfc"]
+[ext_resource type="PackedScene" uid="uid://bhdnpvljoedtt" path="res://Assets/dominoesPack/25.blend" id="9_m5jtm"]
+[ext_resource type="PackedScene" uid="uid://b37ngtllxblaj" path="res://Assets/dominoesPack/26.blend" id="10_hrpix"]
+[ext_resource type="PackedScene" uid="uid://cccu84354qa18" path="res://Assets/dominoesPack/34.blend" id="11_6pnn5"]
+[ext_resource type="PackedScene" uid="uid://b6ftlek6li33y" path="res://Assets/dominoesPack/35.blend" id="12_tlbe5"]
+[ext_resource type="PackedScene" uid="uid://cno2qje8dfaxf" path="res://Assets/dominoesPack/36.blend" id="13_j1tvy"]
+[ext_resource type="PackedScene" uid="uid://ytkm5rft8kuk" path="res://Assets/dominoesPack/45.blend" id="14_6g5yv"]
+[ext_resource type="PackedScene" uid="uid://bcbaxm58et8x" path="res://Assets/dominoesPack/46.blend" id="15_kodxr"]
+[ext_resource type="PackedScene" uid="uid://cgyhnd7k3ddl1" path="res://Assets/dominoesPack/56.blend" id="16_fss42"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1ephp"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_08fip"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_1ephp"]
-
 [node name="StaticBody3D" type="StaticBody3D"]
 script = ExtResource("1_08fip")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="Collision_Bottom" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.5, 0, 0.5, 0)
 shape = SubResource("BoxShape3D_1ephp")
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+[node name="Collision_Top" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.5, 0, 1.5, 0)
 shape = SubResource("BoxShape3D_08fip")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 0.5, 0, 1, 0)
-mesh = SubResource("BoxMesh_1ephp")
+[node name="12" parent="." instance=ExtResource("2_oqgk8")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="13" parent="." instance=ExtResource("3_efxmq")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="14" parent="." instance=ExtResource("4_0qdc8")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="15" parent="." instance=ExtResource("5_5xod7")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="16" parent="." instance=ExtResource("6_tiwaa")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="23" parent="." instance=ExtResource("7_k8qxj")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="24" parent="." instance=ExtResource("8_3kqfc")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="25" parent="." instance=ExtResource("9_m5jtm")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="26" parent="." instance=ExtResource("10_hrpix")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="34" parent="." instance=ExtResource("11_6pnn5")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="35" parent="." instance=ExtResource("12_tlbe5")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="36" parent="." instance=ExtResource("13_j1tvy")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="45" parent="." instance=ExtResource("14_6g5yv")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="46" parent="." instance=ExtResource("15_kodxr")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="56" parent="." instance=ExtResource("16_fss42")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[editable path="14"]
