@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://bqlf6bjleu52k"]
+
+[ext_resource type="PackedScene" uid="uid://x440ofqhhcec" path="res://Assets/dominoesPack/01.blend" id="1_xjjte"]
+[ext_resource type="PackedScene" uid="uid://beyv0lwpslg8e" path="res://Scenes/player.tscn" id="2_acvas"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_acvas"]
+size = Vector3(20, 1, 20)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pm723"]
+albedo_color = Color(0.051970966, 0.05197096, 0.05197095, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_70u62"]
+material = SubResource("StandardMaterial3D_pm723")
+size = Vector3(20, 1, 20)
+
+[node name="Node3D" type="Node3D" unique_id=671484756]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=761573769]
+transform = Transform3D(-0.8660254, -0.43301278, 0.24999999, 0.4330128, -0.39951912, 0.80801266, -0.24999999, 0.80801266, 0.53349376, 0, 0, 0)
+shadow_enabled = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=488380529]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=519780972]
+shape = SubResource("BoxShape3D_acvas")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D" unique_id=1978292251]
+mesh = SubResource("BoxMesh_70u62")
+skeleton = NodePath("../..")
+
+[node name="01" parent="." unique_id=226466623 instance=ExtResource("1_xjjte")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.208)
+
+[node name="Player" parent="." unique_id=388203353 instance=ExtResource("2_acvas")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.5891101)
