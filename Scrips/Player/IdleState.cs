@@ -6,12 +6,20 @@ public partial class IdleState : State
 {
     [Export] private CameraController cameraController;
     [Export] private Crosshair crosshair;
+    [Export] private AnimationPlayer gunAnimations;
     public override void Enter(State prevState)
     {
         // If prevState == Shooting: reset back to idle here
         GD.Print("Entered Idle State!");
         cameraController.RequestCameraZoom(75.0f);
         crosshair.RequestReset();
+
+        
+        if(prevState != null && prevState.stateName == "ShootingState")
+        {
+            gunAnimations.Play("firstperson_shoot1");     
+        }
+
     }
 
     public override void Exit()

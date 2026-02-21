@@ -5,7 +5,7 @@ using System.Security.Cryptography.X509Certificates;
 public partial class Crosshair : Control
 {
     [ExportGroup("Crosshair Settings")]
-	[Export] private float Radius = 20f;
+	[Export] public float Radius = 20f;
     [Export] private float Thickness = 2f;
     [Export] private Color CrosshairColor = Colors.White;
     [Export] private int Segments = 64;
@@ -16,6 +16,7 @@ public partial class Crosshair : Control
     private Vector2 screenCenter;
     private Vector2 basePosition;
     private bool increment;
+    private bool stopped = false;
     public override void _Ready()
     {
         GD.Randomize();
@@ -44,7 +45,13 @@ public partial class Crosshair : Control
         Position = basePosition;
         yValue = xOffset = 0.0f;
         //direction = GD.Randf() < 0.5f ? -1 : 1;
+        stopped = false;
         Visible = false;
+    }
+
+    public void RequestStop()
+    {
+        stopped = true;
     }
 
     public void RequestPatternLoad(SinePatterns.Patterns newPattern)
@@ -58,7 +65,7 @@ public partial class Crosshair : Control
 
         base._Process(delta);
 
-        if(!Visible)
+        if(!Visible || stopped)
             return;
 
         CrosshairGrowShrink();
