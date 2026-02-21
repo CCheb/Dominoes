@@ -42,13 +42,15 @@ script = ExtResource("1_v0iea")
 script = ExtResource("3_x3wgy")
 currentState = NodePath("IdleState")
 
-[node name="IdleState" type="Node" parent="PlayerStateMachine" unique_id=711519015 node_paths=PackedStringArray("cameraController")]
+[node name="IdleState" type="Node" parent="PlayerStateMachine" unique_id=711519015 node_paths=PackedStringArray("cameraController", "crosshair")]
 script = ExtResource("4_3smsa")
 cameraController = NodePath("../../CameraController")
+crosshair = NodePath("../../Control/Crosshair")
 
-[node name="AimingState" type="Node" parent="PlayerStateMachine" unique_id=1279557584 node_paths=PackedStringArray("cameraController")]
+[node name="AimingState" type="Node" parent="PlayerStateMachine" unique_id=1279557584 node_paths=PackedStringArray("cameraController", "crosshair")]
 script = ExtResource("5_8erm5")
 cameraController = NodePath("../../CameraController")
+crosshair = NodePath("../../Control/Crosshair")
 
 [node name="ShootingState" type="Node" parent="PlayerStateMachine" unique_id=540410783]
 script = ExtResource("6_f1ek2")
