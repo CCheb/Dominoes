@@ -2,7 +2,10 @@ using Godot;
 using System;
 
 public partial class DominoObject : StaticBody3D
-{
+{   
+    [Export] public Area3D top_area;
+    [Export] public Area3D bottom_area;
+
     public Node3D Domino_01;
     public Node3D Domino_02;
     public Node3D Domino_03;
@@ -25,9 +28,6 @@ public partial class DominoObject : StaticBody3D
     public Node3D Domino_46;
     public Node3D Domino_56;
 
-
-    public CollisionShape3D top;
-    public CollisionShape3D bottom;
     public int top_value = 0;
     public int bottom_value = 0;
 
@@ -37,6 +37,11 @@ public partial class DominoObject : StaticBody3D
     int currentXDegrees = 0;
 
     public bool falling = false;
+    public bool isPreRotated = false;
+
+    // signal to emit the number value of the domino face that was hit
+    [Signal]
+    public delegate void DominoHitEventHandler(int value);
 
     public override void _Ready()
     {
@@ -63,12 +68,6 @@ public partial class DominoObject : StaticBody3D
         Domino_46 = GetNode<Node3D>("46");
         Domino_56 = GetNode<Node3D>("56");
 
-
-        //get collision shaped
-        top = GetNode<CollisionShape3D>("Collision_Top");
-        bottom = GetNode<CollisionShape3D>("Collision_Bottom");
-
-
         Domino_01.Visible = false;
         Domino_02.Visible = false;
         Domino_03.Visible = false;
@@ -90,6 +89,9 @@ public partial class DominoObject : StaticBody3D
         Domino_45.Visible = false;
         Domino_46.Visible = false;
         Domino_56.Visible = false;
+
+        top_area.BodyEntered += OnTopCollisionEnter;
+        bottom_area.BodyEntered += OnBottomCollisionEnter;
     }
 
 
@@ -348,10 +350,43 @@ public partial class DominoObject : StaticBody3D
         t = t.Rotated(new Vector3(0, 0, 1), Mathf.Pi);
         t = t.Translated(pivot);
         domino01.Transform = t;
+
+        // set isPreRotated to true so that the domino's collisions aren't mixed up
+        isPreRotated = true;
     }
 
-    // TODO: colision function 
+    // collision functions 
+    public void OnTopCollisionEnter(Node3D body)
+    {
+        // check if its in group BULLET
+        if (body.IsInGroup("BULLET"))
+        {
+            if(isPreRotated)
+            {
+                // if the domino is pre-rotated then the top and bottom values are switched
+                EmitSignal("DominoHit", bottom_value);
+                return;
+            }
+            // emit signal with the value of the top face of the domino
+            EmitSignal("DominoHit", top_value);
+        }
+    }
 
+    public void OnBottomCollisionEnter(Node3D body)
+    {
+        // check if its in group BULLET
+        if (body.IsInGroup("BULLET"))
+        {
+            if(isPreRotated)
+            {
+                // if the domino is pre-rotated then the top and bottom values are switched
+                EmitSignal("DominoHit", top_value);
+                return;
+            }
+            // emit signal with the value of the bottom face of the domino
+            EmitSignal("DominoHit", bottom_value);
+        }
+    }
 
 
     //domino die
