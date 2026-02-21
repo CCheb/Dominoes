@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://beyv0lwpslg8e"]
+
+[ext_resource type="Script" uid="uid://dob0hwygrfcub" path="res://Scrips/Player/CameraController.cs" id="1_cvnsp"]
+[ext_resource type="Script" uid="uid://duno8s3nyisxw" path="res://Scrips/Player/Crosshair.cs" id="1_v0iea"]
+[ext_resource type="Script" uid="uid://c7ouowcfnxfw3" path="res://Scrips/Player/PlayerStateMachine.cs" id="3_x3wgy"]
+[ext_resource type="Script" uid="uid://7j1yhcnsgaes" path="res://Scrips/Player/IdleState.cs" id="4_3smsa"]
+[ext_resource type="Script" uid="uid://cm3y5rd4un08q" path="res://Scrips/Player/AimingState.cs" id="5_8erm5"]
+[ext_resource type="Script" uid="uid://bluv57cc6jwt6" path="res://Scrips/Player/ShootingState.cs" id="6_f1ek2"]
+
+[node name="Player" type="Node3D" unique_id=388203353]
+
+[node name="CameraController" type="Node3D" parent="." unique_id=540089889]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+script = ExtResource("1_cvnsp")
+
+[node name="Camera3D" type="Camera3D" parent="CameraController" unique_id=87795080]
+
+[node name="Control" type="Control" parent="." unique_id=809095675]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Crosshair" type="Control" parent="Control" unique_id=1646638249]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_v0iea")
+
+[node name="PlayerStateMachine" type="Node" parent="." unique_id=1128382326 node_paths=PackedStringArray("currentState")]
+script = ExtResource("3_x3wgy")
+currentState = NodePath("IdleState")
+
+[node name="IdleState" type="Node" parent="PlayerStateMachine" unique_id=711519015 node_paths=PackedStringArray("cameraController")]
+script = ExtResource("4_3smsa")
+cameraController = NodePath("../../CameraController")
+
+[node name="AimingState" type="Node" parent="PlayerStateMachine" unique_id=1279557584 node_paths=PackedStringArray("cameraController")]
+script = ExtResource("5_8erm5")
+cameraController = NodePath("../../CameraController")
+
+[node name="ShootingState" type="Node" parent="PlayerStateMachine" unique_id=540410783]
+script = ExtResource("6_f1ek2")
