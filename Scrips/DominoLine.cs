@@ -71,5 +71,7 @@ public partial class DominoLine : Node3D
       // call domino's method to set its faces
       domino.Call("domino_type", inputInt);
     }
+
+    dominoes[0].Call("domino_die");
   }
 }
