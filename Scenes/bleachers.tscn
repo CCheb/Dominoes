@@ -1,0 +1,131 @@
+[gd_scene format=3 uid="uid://b3nnitio1tjw5"]
+
+[ext_resource type="Script" uid="uid://cs1iuidbgyjp8" path="res://Scrips/Bleachers.cs" id="1_cxq22"]
+[ext_resource type="PackedScene" uid="uid://b61mp7mfenkv8" path="res://Domino_Object.tscn" id="1_tcdju"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cxq22"]
+size = Vector3(1, 0.1, 30)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ilxhb"]
+albedo_color = Color(0.71907645, 0.71907645, 0.71907645, 1)
+metallic = 0.8
+roughness = 0.4
+
+[sub_resource type="BoxMesh" id="BoxMesh_vys18"]
+material = SubResource("StandardMaterial3D_ilxhb")
+size = Vector3(1, 0.1, 30)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xsvm4"]
+albedo_color = Color(0.7176471, 0.7176471, 0.7176471, 1)
+metallic = 0.8
+roughness = 0.4
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_km784"]
+material = SubResource("StandardMaterial3D_xsvm4")
+top_radius = 0.15
+bottom_radius = 0.15
+height = 1.5
+
+[node name="Bleachers" type="StaticBody3D" unique_id=2000577951]
+script = ExtResource("1_cxq22")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2001910782]
+shape = SubResource("BoxShape3D_cxq22")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1128929108]
+mesh = SubResource("BoxMesh_vys18")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=386321337]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.459764, 0.8461484, 0)
+shape = SubResource("BoxShape3D_cxq22")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1805573540]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.459764, 0.8461484, 0)
+mesh = SubResource("BoxMesh_vys18")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="." unique_id=1954049793]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9171948, 1.4904863, 0)
+shape = SubResource("BoxShape3D_cxq22")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="." unique_id=1275208641]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9171948, 1.4904863, 0)
+mesh = SubResource("BoxMesh_vys18")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="." unique_id=880699078]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.7, 0)
+mesh = SubResource("CylinderMesh_km784")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="." unique_id=82049937]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.7, -8.053591)
+mesh = SubResource("CylinderMesh_km784")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="." unique_id=1550445672]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.7, 8.053595)
+mesh = SubResource("CylinderMesh_km784")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="." unique_id=1537070836]
+transform = Transform3D(1, 0, 0, 0, 0.6, 0, 0, 0, 1, -1.462635, 0.39367205, 11.520049)
+mesh = SubResource("CylinderMesh_km784")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="." unique_id=1402050374]
+transform = Transform3D(1, 0, 0, 0, 0.6, 0, 0, 0, 1, -1.462635, 0.39367205, 3.9233503)
+mesh = SubResource("CylinderMesh_km784")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="." unique_id=1733342170]
+transform = Transform3D(1, 0, 0, 0, 0.6, 0, 0, 0, 1, -1.462635, 0.39367205, -4.115876)
+mesh = SubResource("CylinderMesh_km784")
+
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="." unique_id=454257736]
+transform = Transform3D(1, 0, 0, 0, 0.6, 0, 0, 0, 1, -1.462635, 0.39367205, -11.9707155)
+mesh = SubResource("CylinderMesh_km784")
+
+[node name="StaticBody3D" parent="." unique_id=2041389748 instance=ExtResource("1_tcdju")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.00088095665, 0.049999952, 13.059718)
+
+[node name="StaticBody3D2" parent="." unique_id=1911773925 instance=ExtResource("1_tcdju")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -1.3989315, 0.89614964, 10.411411)
+
+[node name="StaticBody3D3" parent="." unique_id=1590910488 instance=ExtResource("1_tcdju")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2.9355507, 1.5404863, 4.4779377)
+
+[node name="StaticBody3D4" parent="." unique_id=1252163111 instance=ExtResource("1_tcdju")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.07955837, 0.049999237, -3.4315615)
+
+[node name="StaticBody3D5" parent="." unique_id=1216348016 instance=ExtResource("1_tcdju")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -1.398076, 0.89614964, 8.54048)
+
+[node name="StaticBody3D6" parent="." unique_id=1662103066 instance=ExtResource("1_tcdju")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2.8410015, 1.5404863, 12.082943)
+
+[node name="StaticBody3D7" parent="." unique_id=1620383719 instance=ExtResource("1_tcdju")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.11824703, 0.050001144, 5.8586445)
+
+[node name="StaticBody3D8" parent="." unique_id=1528545317 instance=ExtResource("1_tcdju")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -1.2979002, 0.8961487, -1.250432)
+
+[node name="StaticBody3D9" parent="." unique_id=666413641 instance=ExtResource("1_tcdju")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.13070774, 0.05000019, 1.7859468)
+
+[node name="StaticBody3D10" parent="." unique_id=275624989 instance=ExtResource("1_tcdju")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2.949768, 1.5404863, -8.092977)
+
+[node name="StaticBody3D11" parent="." unique_id=294335703 instance=ExtResource("1_tcdju")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2.837801, 1.5404863, -9.918332)
+
+[node name="StaticBody3D12" parent="." unique_id=239321160 instance=ExtResource("1_tcdju")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.16546631, 0.050001144, -5.244271)
+
+[node name="StaticBody3D13" parent="." unique_id=1063116662 instance=ExtResource("1_tcdju")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.22502708, 0.05000019, -6.9498367)
+
+[node name="StaticBody3D14" parent="." unique_id=154183577 instance=ExtResource("1_tcdju")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -1.4182796, 0.8961487, -12.579943)
+
+[node name="StaticBody3D15" parent="." unique_id=58933343 instance=ExtResource("1_tcdju")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2.7906227, 1.5404863, -4.545527)
+
+[node name="StaticBody3D16" parent="." unique_id=514379624 instance=ExtResource("1_tcdju")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.08046913, 0.05000019, -11.319783)
+
+[node name="StaticBody3D17" parent="." unique_id=2085346500 instance=ExtResource("1_tcdju")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2.9430408, 1.5404854, 2.5100708)
