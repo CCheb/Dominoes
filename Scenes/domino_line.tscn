@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://cttmv2fqhbg5i"]
+
+[ext_resource type="Script" uid="uid://ciudmid1sl26f" path="res://Scrips/DominoLine.cs" id="1_dqi1o"]
+[ext_resource type="PackedScene" uid="uid://b61mp7mfenkv8" path="res://Domino_Object.tscn" id="2_v3785"]
+
+[node name="DominoLine" type="Node3D" unique_id=176385792]
+script = ExtResource("1_dqi1o")
+dominoScene = ExtResource("2_v3785")
