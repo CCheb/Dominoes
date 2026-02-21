@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bk3gvqgr6ap8s"
+path="res://.godot/imported/oh-im-jaking-it.mp3-876b2602ef9a90282e67ec38e9ab4e8b.mp3str"
+
+[deps]
+
+source_file="res://Do not look here/Nothing to see here/IM WARNING YOU/Alright, you asked for this/oh-im-jaking-it.mp3"
+dest_files=["res://.godot/imported/oh-im-jaking-it.mp3-876b2602ef9a90282e67ec38e9ab4e8b.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

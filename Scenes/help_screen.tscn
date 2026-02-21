@@ -1,0 +1,111 @@
+[gd_scene load_steps=9 format=3 uid="uid://ie1ltkn2ji5i"]
+
+[ext_resource type="Script" uid="uid://dhdkrcor4ndd5" path="res://Scenes/HelpScreen.cs" id="1_ag0tr"]
+[ext_resource type="Script" uid="uid://b0hdotgceqmml" path="res://Scrips/CamPivot.cs" id="1_q6s0c"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_73icc"]
+albedo_color = Color(0.101960786, 0.34901962, 0, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_q6s0c"]
+material = SubResource("StandardMaterial3D_73icc")
+size = Vector2(1, 1)
+
+[sub_resource type="HeightMapShape3D" id="HeightMapShape3D_ag0tr"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7iiir"]
+albedo_color = Color(0.20086536, 0.086976744, 0.018943096, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_3mbpc"]
+material = SubResource("StandardMaterial3D_7iiir")
+size = Vector3(0.2, 5, 19.8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jks8t"]
+size = Vector3(0.2, 5, 19)
+
+[node name="HelpScreen" type="Node3D" node_paths=PackedStringArray("back")]
+script = ExtResource("1_ag0tr")
+back = NodePath("UI/Back")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI"]
+layout_mode = 0
+offset_left = 400.0
+offset_top = 200.0
+offset_right = 700.0
+offset_bottom = 500.0
+text = "We spinning
+
+WOOOOOOOOOOO"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Back" type="Button" parent="UI"]
+layout_mode = 0
+anchor_left = 0.95
+anchor_top = 14.55
+anchor_right = 5.025
+anchor_bottom = 15.325
+text = "Back to Start screen"
+metadata/_edit_use_anchors_ = true
+
+[node name="Scenery" type="Node3D" parent="."]
+
+[node name="Floor" type="StaticBody3D" parent="Scenery"]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Scenery/Floor"]
+mesh = SubResource("PlaneMesh_q6s0c")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Scenery/Floor"]
+shape = SubResource("HeightMapShape3D_ag0tr")
+
+[node name="Walls" type="Node3D" parent="Scenery"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Scenery/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 2.5, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Scenery/Walls/StaticBody3D"]
+mesh = SubResource("BoxMesh_3mbpc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Scenery/Walls/StaticBody3D"]
+shape = SubResource("BoxShape3D_jks8t")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="Scenery/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 2.5, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Scenery/Walls/StaticBody3D2"]
+mesh = SubResource("BoxMesh_3mbpc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Scenery/Walls/StaticBody3D2"]
+shape = SubResource("BoxShape3D_jks8t")
+
+[node name="StaticBody3D3" type="StaticBody3D" parent="Scenery/Walls"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 2.5, 10)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Scenery/Walls/StaticBody3D3"]
+mesh = SubResource("BoxMesh_3mbpc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Scenery/Walls/StaticBody3D3"]
+shape = SubResource("BoxShape3D_jks8t")
+
+[node name="StaticBody3D4" type="StaticBody3D" parent="Scenery/Walls"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 2.5, -10)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Scenery/Walls/StaticBody3D4"]
+mesh = SubResource("BoxMesh_3mbpc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Scenery/Walls/StaticBody3D4"]
+shape = SubResource("BoxShape3D_jks8t")
+
+[node name="Cam_Pivot" type="Node3D" parent="."]
+script = ExtResource("1_q6s0c")
+
+[node name="Camera3D" type="Camera3D" parent="Cam_Pivot"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 2, 0)
+
+[connection signal="pressed" from="UI/Back" to="." method="_on_back_pressed"]
