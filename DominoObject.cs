@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class DominoObject : StaticBody3D
 {   
@@ -39,6 +40,11 @@ public partial class DominoObject : StaticBody3D
     public bool falling = false;
     public bool isPreRotated = false;
 
+    public List<Node3D> domino_list = new List<Node3D>();
+
+    public int total_rotate = 0;
+
+
     // signal to emit the number value of the domino face that was hit
     [Signal]
     public delegate void DominoHitEventHandler(int value);
@@ -46,6 +52,7 @@ public partial class DominoObject : StaticBody3D
     public override void _Ready()
     {
         currentXDegrees = (int)Mathf.RadToDeg(Rotation.X);
+
         Domino_01 = GetNode<Node3D>("01");
         Domino_02 = GetNode<Node3D>("02");
         Domino_03 = GetNode<Node3D>("03");
@@ -67,6 +74,7 @@ public partial class DominoObject : StaticBody3D
         Domino_45 = GetNode<Node3D>("45");
         Domino_46 = GetNode<Node3D>("46");
         Domino_56 = GetNode<Node3D>("56");
+
 
         Domino_01.Visible = false;
         Domino_02.Visible = false;
@@ -92,6 +100,33 @@ public partial class DominoObject : StaticBody3D
 
         top_area.BodyEntered += OnTopCollisionEnter;
         bottom_area.BodyEntered += OnBottomCollisionEnter;
+        
+        domino_list.Add(Domino_01);
+        domino_list.Add(Domino_02);
+        domino_list.Add(Domino_03);
+        domino_list.Add(Domino_04);
+        domino_list.Add(Domino_05);
+        domino_list.Add(Domino_06);
+
+        domino_list.Add(Domino_12);
+        domino_list.Add(Domino_13);
+        domino_list.Add(Domino_14);
+        domino_list.Add(Domino_15);
+        domino_list.Add(Domino_16);
+
+        domino_list.Add(Domino_23);
+        domino_list.Add(Domino_24);
+        domino_list.Add(Domino_25);
+        domino_list.Add(Domino_26);
+
+        domino_list.Add(Domino_34);
+        domino_list.Add(Domino_35);
+        domino_list.Add(Domino_36);
+
+        domino_list.Add(Domino_45);
+        domino_list.Add(Domino_46);
+
+        domino_list.Add(Domino_56);
     }
 
 
@@ -338,6 +373,17 @@ public partial class DominoObject : StaticBody3D
                 GD.Print(number.ToString() + " is an invalid domino type");
                 break;
         }
+
+        foreach(Node3D n in domino_list)
+        {
+            if(n.Visible == false)
+            {
+                GD.Print(n.Name);
+                n.QueueFree();
+            }
+        }
+
+       
     }
 
     private void RotateAroundZ(Node3D domino01)
@@ -405,7 +451,12 @@ public partial class DominoObject : StaticBody3D
             if(currentXDegrees > -90)
             {
                 int rotation = currentXDegrees -1;
-                RotateX(Mathf.DegToRad(-2f));
+                RotateX(Mathf.DegToRad(-1f));
+                total_rotate --;
+            }
+            if (total_rotate < -90)
+            {
+                falling = false;
             }
         }
         currentXDegrees = (int)Mathf.RadToDeg(Rotation.X);
