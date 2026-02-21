@@ -31,8 +31,16 @@ public partial class DominoObject : StaticBody3D
     public int top_value = 0;
     public int bottom_value = 0;
 
+    private float startRotationX = 0;
+    private float targetRotationX = -80;
+
+    int currentXDegrees = 0;
+
+    public bool falling = false;
+
     public override void _Ready()
     {
+        currentXDegrees = (int)Mathf.RadToDeg(Rotation.X);
         Domino_01 = GetNode<Node3D>("01");
         Domino_02 = GetNode<Node3D>("02");
         Domino_03 = GetNode<Node3D>("03");
@@ -343,4 +351,30 @@ public partial class DominoObject : StaticBody3D
     }
 
     // TODO: colision function 
+
+
+
+    //domino die
+    //when called this will make the domino fall
+    //need to lerp this
+    public void domino_die()
+    {
+        falling = true;
+    }
+
+    public override void _PhysicsProcess(double delta)
+    {
+        
+        if(falling)
+        {
+            if(currentXDegrees > -90)
+            {
+                int rotation = currentXDegrees -1;
+                RotateX(Mathf.DegToRad(-2f));
+            }
+        }
+        currentXDegrees = (int)Mathf.RadToDeg(Rotation.X);
+    }
+
+
 }
