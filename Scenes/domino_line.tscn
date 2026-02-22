@@ -30,3 +30,8 @@ text = "Dominoes Remaining: "
 [node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="." unique_id=2039942804]
 stream = ExtResource("3_khn0g")
 volume_db = -7.752
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=1987336855]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 3.7919588, 0)
+light_energy = 16.0
+light_specular = 6.5
