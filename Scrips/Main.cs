@@ -11,6 +11,8 @@ public partial class Main : Node3D
     [Export] public Node3D DominoLine2;
     [Export] public Control WinScreen;
     [Export] public Label WinLabel;
+
+    public bool isP1Turn = true;
     
     // This game is a turn-based game between two players
     // Each player has a camera and a line of dominoes (camera is a child of player)
@@ -33,14 +35,27 @@ public partial class Main : Node3D
 
     private void ProcessShootingResult(string result)
     {
-        if(result == "Miss")
+        if(result == "Miss"){
             GD.Print("miss!");
+        
+        /* This fix allows turn switching upon missing, however P2's camera breaks
+            if (isP1Turn)
+            {
+                TriggerTransitionCamera1();
+            }
+            else
+            {
+                TriggerTransitionCamera2();
+            }
+        */
+        }
         else
             GD.Print("hit!!");
     }
 
     public void SetP1Turn()
     {  
+        isP1Turn = true;
         P1.GetNode<Control>("Control").Visible = true;
         P1.Visible = true;
 
@@ -54,7 +69,7 @@ public partial class Main : Node3D
     }
     public void SetP2Turn()
     {
-
+        isP1Turn = false;
         P1.GetNode<Control>("Control").Visible = false;
         P1.Visible = false;
 
@@ -143,6 +158,6 @@ public partial class Main : Node3D
 
     public void OnQuitButtonPressed()
     {
-        GetTree().Quit();
+        GetTree().ChangeSceneToFile("res://Scenes/start_screen.tscn");
     }
 }

@@ -46,40 +46,42 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Start" type="Button" parent="UI" unique_id=1543943910]
 layout_mode = 0
-offset_left = 330.0
-offset_top = 250.0
-offset_right = 480.0
-offset_bottom = 300.0
+anchor_left = 0.4125
+anchor_top = 0.5
+anchor_right = 0.6
+anchor_bottom = 0.6
+offset_right = -3.0517578e-05
 theme_override_font_sizes/font_size = 20
 text = "Start game"
 metadata/_edit_use_anchors_ = true
 
 [node name="Help" type="Button" parent="UI" unique_id=1258952467]
 layout_mode = 0
-offset_left = 330.0
-offset_top = 327.0
-offset_right = 480.0
-offset_bottom = 377.0
+anchor_left = 0.4125
+anchor_top = 0.654
+anchor_right = 0.6
+anchor_bottom = 0.754
+offset_right = -3.0517578e-05
 theme_override_font_sizes/font_size = 20
 text = "Help"
 metadata/_edit_use_anchors_ = true
 
 [node name="Secret" type="Button" parent="UI" unique_id=905574233]
 layout_mode = 0
-offset_left = 10.0
-offset_top = 460.0
-offset_right = 85.0
-offset_bottom = 485.0
+anchor_left = 0.0125
+anchor_top = 0.92
+anchor_right = 0.10625
+anchor_bottom = 0.97
 theme_override_font_sizes/font_size = 10
 text = "Do NOT Push"
 metadata/_edit_use_anchors_ = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="UI" unique_id=1849732991]
 layout_mode = 0
-offset_left = 260.0
-offset_top = 80.0
-offset_right = 560.0
-offset_bottom = 180.0
+anchor_left = 0.325
+anchor_top = 0.16
+anchor_right = 0.7
+anchor_bottom = 0.36
 theme_override_font_sizes/normal_font_size = 30
 text = "DOMINOS
 (not the pizza)"
