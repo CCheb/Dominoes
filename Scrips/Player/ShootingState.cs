@@ -10,6 +10,11 @@ public partial class ShootingState : State
     [Export] private Crosshair crosshair;
     [Export] private AudioStreamPlayer3D gunSound;
     [Export] private PackedScene testDecal;
+
+    // signal to emit the number value of the domino face that was hit
+    [Signal]
+    public delegate void DominoWasHitEventHandler();
+
     public override async void Enter(State prevState)
     {
         // If prevState == Shooting: reset back to idle here
@@ -17,6 +22,7 @@ public partial class ShootingState : State
         GD.Print("Entered Shooting State");
         crosshair.RequestStop();
         Fire();
+        SendSignalToMain();
         await ToSignal(GetTree().CreateTimer(1.0f), "timeout");
         EmitSignalTransition("IdleState");
     }
@@ -88,5 +94,12 @@ public partial class ShootingState : State
         return;
     }
 
+    private async void SendSignalToMain()
+    {
+        // Wait a short moment to ensure that the signal is processed after the state transition
+        await ToSignal(GetTree().CreateTimer(0.4f), "timeout");
+        // emit signal to trigger camera transition
+        EmitSignal("DominoWasHit");
+    }
 
 }

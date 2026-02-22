@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cd7u4h7bx4amn"]
 
 [ext_resource type="PackedScene" uid="uid://b3nnitio1tjw5" path="res://Scenes/bleachers.tscn" id="1_q2fht"]
-[ext_resource type="Script" uid="uid://mno111v57dmh" path="res://Scrips/Main.cs" id="1_qbrl8"]
+[ext_resource type="Script" uid="uid://csay5ffhn687" path="res://Scrips/Main.cs" id="1_qbrl8"]
 [ext_resource type="PackedScene" uid="uid://cttmv2fqhbg5i" path="res://Scenes/domino_line.tscn" id="2_ikcpc"]
 [ext_resource type="PackedScene" uid="uid://beyv0lwpslg8e" path="res://Scenes/player.tscn" id="3_5erdv"]
 [ext_resource type="AudioStream" uid="uid://bngmxgdtdx8ka" path="res://Assets/audio/wii-sports-knockoff.mp3" id="5_a2ia3"]

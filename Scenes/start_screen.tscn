@@ -1,7 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://dofqovxjmjuvt"]
+[gd_scene format=3 uid="uid://dofqovxjmjuvt"]
 
-[ext_resource type="Script" uid="uid://sapw50mfvsis" path="res://Scrips/StartScreen.cs" id="1_ainjc"]
-[ext_resource type="Script" uid="uid://blpsvn37sh7kk" path="res://Scrips/CamPivot.cs" id="1_i8r30"]
+[ext_resource type="Script" uid="uid://dqxtdd5ki1ok" path="res://Scrips/StartScreen.cs" id="1_ainjc"]
+[ext_resource type="Script" uid="uid://4hr11nosr3rb" path="res://Scrips/CamPivot.cs" id="1_i8r30"]
 [ext_resource type="PackedScene" uid="uid://b3nnitio1tjw5" path="res://Scenes/bleachers.tscn" id="3_mtlf8"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_60ddj"]
@@ -30,13 +30,13 @@ size = Vector3(0.2, 5, 50)
 background_mode = 1
 background_color = Color(0.38760868, 0.7448859, 1, 1)
 
-[node name="Start_Screen" type="Node3D" node_paths=PackedStringArray("start", "help", "secret")]
+[node name="Start_Screen" type="Node3D" unique_id=1880878480 node_paths=PackedStringArray("start", "help", "secret")]
 script = ExtResource("1_ainjc")
 start = NodePath("UI/Start")
 help = NodePath("UI/Help")
 secret = NodePath("UI/Secret")
 
-[node name="UI" type="Control" parent="."]
+[node name="UI" type="Control" parent="." unique_id=1603662629]
 layout_mode = 3
 anchor_left = 0.1736111
 anchor_top = 0.12345679
@@ -44,7 +44,7 @@ anchor_right = 0.8680556
 anchor_bottom = 0.89506173
 metadata/_edit_use_anchors_ = true
 
-[node name="Start" type="Button" parent="UI"]
+[node name="Start" type="Button" parent="UI" unique_id=162142648]
 layout_mode = 0
 anchor_left = 0.4125
 anchor_top = 0.5
@@ -55,7 +55,7 @@ theme_override_font_sizes/font_size = 20
 text = "Start game"
 metadata/_edit_use_anchors_ = true
 
-[node name="Help" type="Button" parent="UI"]
+[node name="Help" type="Button" parent="UI" unique_id=1289262822]
 layout_mode = 0
 anchor_left = 0.4125
 anchor_top = 0.654
@@ -66,7 +66,7 @@ theme_override_font_sizes/font_size = 20
 text = "Help"
 metadata/_edit_use_anchors_ = true
 
-[node name="Secret" type="Button" parent="UI"]
+[node name="Secret" type="Button" parent="UI" unique_id=1635578503]
 layout_mode = 0
 anchor_left = 0.0125
 anchor_top = 0.92
@@ -76,7 +76,7 @@ theme_override_font_sizes/font_size = 10
 text = "Do NOT Push"
 metadata/_edit_use_anchors_ = true
 
-[node name="RichTextLabel" type="RichTextLabel" parent="UI"]
+[node name="RichTextLabel" type="RichTextLabel" parent="UI" unique_id=143404058]
 layout_mode = 0
 anchor_left = 0.325
 anchor_top = 0.16
@@ -89,98 +89,109 @@ horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Credits" type="RichTextLabel" parent="UI"]
+[node name="ColorRect" type="ColorRect" parent="UI" unique_id=1789683888]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.64900005
-anchor_top = 0.57600003
-anchor_right = 1.146
+anchor_left = 0.68700004
+anchor_top = 0.43400002
+anchor_right = 1.174
+anchor_bottom = 1.108
+offset_left = 0.39996338
+offset_right = -0.2000122
+color = Color(0, 0, 0, 0.3019608)
+
+[node name="Credits" type="RichTextLabel" parent="UI" unique_id=1605320039]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.689
+anchor_top = 0.388
+anchor_right = 1.182
 anchor_bottom = 1.09
 offset_left = -0.2000122
-offset_top = -88.00003
-offset_right = 0.19995117
-text = "Assets used 
-Dominos model - 
-Background music - 
-Cheers - 
-Gunshot sound - https://pixabay.com/sound-effects/film-special-effects-gun-shots-from-a-distance-7-96391/
-Rifle Model - https://sketchfab.com/3d-models/rifle-awp-weapon-model-cs2-23ad3d7fb46b40e59cab7937654e2691"
+offset_top = 20.0
+offset_right = 0.39996338
+text = "Assets used:
+- Domino models - https://sketchfab.com/3d-models/high-quality-dominoe-pack-7d2cda115fc640e3b3d0473f66c9a4f7
+- Background music - https://pixabay.com/music/video-games-game-176807/
+- Applause - https://freesound.org/people/petillo/sounds/178610/
+- Gunshot sound - https://pixabay.com/sound-effects/film-special-effects-gun-shots-from-a-distance-7-96391/
+- Rifle Model - https://sketchfab.com/3d-models/rifle-awp-weapon-model-cs2-23ad3d7fb46b40e59cab7937654e2691"
 
-[node name="Scenery" type="Node3D" parent="."]
+[node name="Scenery" type="Node3D" parent="." unique_id=1919145434]
 
-[node name="Floor" type="StaticBody3D" parent="Scenery"]
+[node name="Floor" type="StaticBody3D" parent="Scenery" unique_id=1088182493]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Scenery/Floor"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Scenery/Floor" unique_id=972931095]
 transform = Transform3D(2.5, 0, 0, 0, 1, 0, 0, 0, 2.574, 0, 0, 0)
 mesh = SubResource("PlaneMesh_5e717")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Scenery/Floor"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Scenery/Floor" unique_id=769424536]
 shape = SubResource("HeightMapShape3D_mtlf8")
 
-[node name="Walls" type="Node3D" parent="Scenery"]
+[node name="Walls" type="Node3D" parent="Scenery" unique_id=180499538]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Scenery/Walls"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Scenery/Walls" unique_id=2010910108]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.020914, 2.5, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Scenery/Walls/StaticBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Scenery/Walls/StaticBody3D" unique_id=475419350]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 2.4578753, 0, 0, 0)
 mesh = SubResource("BoxMesh_nqnrp")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Scenery/Walls/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Scenery/Walls/StaticBody3D" unique_id=684888107]
 shape = SubResource("BoxShape3D_5a7ho")
 
-[node name="StaticBody3D2" type="StaticBody3D" parent="Scenery/Walls"]
+[node name="StaticBody3D2" type="StaticBody3D" parent="Scenery/Walls" unique_id=194227048]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.020914, 2.5, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Scenery/Walls/StaticBody3D2"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Scenery/Walls/StaticBody3D2" unique_id=610739449]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 2.4640613, 0, 0, 0)
 mesh = SubResource("BoxMesh_nqnrp")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Scenery/Walls/StaticBody3D2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Scenery/Walls/StaticBody3D2" unique_id=1424745926]
 shape = SubResource("BoxShape3D_5a7ho")
 
-[node name="StaticBody3D3" type="StaticBody3D" parent="Scenery/Walls"]
+[node name="StaticBody3D3" type="StaticBody3D" parent="Scenery/Walls" unique_id=218182332]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 2.5, 24.485558)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Scenery/Walls/StaticBody3D3"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Scenery/Walls/StaticBody3D3" unique_id=997433617]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 2.6, 0, 0, 0)
 mesh = SubResource("BoxMesh_nqnrp")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Scenery/Walls/StaticBody3D3"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Scenery/Walls/StaticBody3D3" unique_id=560715584]
 shape = SubResource("BoxShape3D_5a7ho")
 
-[node name="StaticBody3D4" type="StaticBody3D" parent="Scenery/Walls"]
+[node name="StaticBody3D4" type="StaticBody3D" parent="Scenery/Walls" unique_id=805310485]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 2.5, -24.406075)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Scenery/Walls/StaticBody3D4"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Scenery/Walls/StaticBody3D4" unique_id=1105255567]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 2.6, 0, 0, 0)
 mesh = SubResource("BoxMesh_nqnrp")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Scenery/Walls/StaticBody3D4"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Scenery/Walls/StaticBody3D4" unique_id=1657194640]
 shape = SubResource("BoxShape3D_5a7ho")
 
-[node name="Cam_Pivot" type="Node3D" parent="."]
+[node name="Cam_Pivot" type="Node3D" parent="." unique_id=1007543591]
 script = ExtResource("1_i8r30")
 
-[node name="Camera3D" type="Camera3D" parent="Cam_Pivot"]
+[node name="Camera3D" type="Camera3D" parent="Cam_Pivot" unique_id=630370010]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 2, 0)
 
-[node name="Bleachers" parent="." instance=ExtResource("3_mtlf8")]
+[node name="Bleachers" parent="." unique_id=2024951830 instance=ExtResource("3_mtlf8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.178856, 1, 0.02804184)
 
-[node name="Bleachers2" parent="." instance=ExtResource("3_mtlf8")]
+[node name="Bleachers2" parent="." unique_id=1561799022 instance=ExtResource("3_mtlf8")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 19.23023, 0.056329876, -0.44407654)
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1441714993]
 transform = Transform3D(0.9445312, -0.18837488, -0.2690272, 1.0991861e-08, -0.81915206, 0.57357645, -0.3284216, -0.54176086, -0.77371466, -6.082574, 43.785538, -50.466343)
 light_energy = 3.0
 
-[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="." unique_id=300313887]
 transform = Transform3D(0.94476026, -0.18799663, 0.268487, 0, 0.81915206, 0.57357645, -0.3277621, -0.54189223, 0.7739023, 5.9136047, 43.786, 50.64)
 light_energy = 3.0
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1507147353]
 environment = SubResource("Environment_ssogg")
 
 [connection signal="pressed" from="UI/Start" to="." method="_on_start_pressed"]

@@ -33,9 +33,6 @@ public partial class DominoLine : Node3D
   [Signal]
   public delegate void DominoesDownEventHandler();
 
-  // signal to emit the number value of the domino face that was hit
-  [Signal]
-  public delegate void DominoWasHitEventHandler();
 
   public override void _Ready()
   {
@@ -107,8 +104,7 @@ public partial class DominoLine : Node3D
       // if the line is not supposed to get hit, ignore signal
       return;
     }
-    // emit signal to trigger camera transition
-    EmitSignal("DominoWasHit");
+    
     // CHECK IF VALUE IS 0 TO AVOID UNNECESSARY CALCULATIONS
     if (value == 0)
     {
