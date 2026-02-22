@@ -9,9 +9,12 @@ public partial class DominoLine : Node3D
   [Export] public int maxDominoes = 20;
   [Export] public PackedScene dominoScene;
   [Export] public int dominoesRemaining;
+
   [Export] public float spacing = 1.5f;
+
   // number of dominoes before changing direction in the snake pattern
   [Export] public int curveNum = 5;
+
   // angle in radians to curve the line at each turn in the snake pattern
   [Export] public float curveAngle = 0.2f;
 
@@ -55,7 +58,6 @@ public partial class DominoLine : Node3D
         // position behind previous, along its -Z direction
         Vector3 dir = prev.GlobalTransform.Basis.Z.Normalized();
         domino.GlobalPosition = prev.GlobalPosition - dir * spacing;
-
       }
 
       dominoes.Add(domino);
@@ -82,7 +84,7 @@ public partial class DominoLine : Node3D
 
 
     // TEST DOMINO HIT
-    OnDominoHit(3);
+    OnDominoHit(5);
   }
 
   public async void OnDominoHit(int value)
@@ -98,29 +100,38 @@ public partial class DominoLine : Node3D
       positions[i] = dominoes[i].GlobalPosition;
       rotations[i] = dominoes[i].GlobalRotation;
     }
+
     // call kill_dominoes function
     KillDominoes(value);
     // wait a short time to allow dominoes to fall before filling in the line
-    await ToSignal(GetTree().CreateTimer(5f), "timeout");
+    await ToSignal(GetTree().CreateTimer(3f), "timeout");
     // fill in the line with the next dominoes in line
     FillInLine(positions, rotations, value);
   }
 
   public async void KillDominoes(int value)
   {
-    // call domino_die for value amount of dominoes
+    // first, trigger the dies with small delays between them
     for (int i = 0; i < value; i++)
     {
       GD.Print("Killing domino " + i);
       dominoes[i].Call("domino_die");
-      dominoesRemaining--;
-      GD.Print("Dominoes remaining: " + dominoesRemaining);
-      // wait a short time before killing the next domino to create a chain reaction effect
-      await ToSignal(GetTree().CreateTimer(1f), "timeout");
-      // remove from list
-      Node3D temp = dominoes[i];
+      // small delay before triggering the next to fall
+      if (i < value - 1)
+      {
+        await ToSignal(GetTree().CreateTimer(0.2f), "timeout");
+      }
+    }
+
+    // now wait longer to allow them to complete falling before deletion
+    await ToSignal(GetTree().CreateTimer(1.5f), "timeout");
+    // now delete them
+    for (int i = 0; i < value; i++)
+    {
+      Node3D temp = dominoes[0];
       dominoes.RemoveAt(0);
       temp.QueueFree();
+      dominoesRemaining--;
     }
   }
 
@@ -135,7 +146,6 @@ public partial class DominoLine : Node3D
       dominoes[i].GlobalRotation = rotations[i];
     }
   }
-
 }
 
 
