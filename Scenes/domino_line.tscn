@@ -2,7 +2,31 @@
 
 [ext_resource type="Script" uid="uid://ciudmid1sl26f" path="res://Scrips/DominoLine.cs" id="1_dqi1o"]
 [ext_resource type="PackedScene" uid="uid://b61mp7mfenkv8" path="res://Domino_Object.tscn" id="2_v3785"]
+[ext_resource type="AudioStream" uid="uid://bcqrna512cbmt" path="res://Assets/audio/applause.mp3" id="3_khn0g"]
 
-[node name="DominoLine" type="Node3D" unique_id=176385792]
+[node name="DominoLine" type="Node3D" unique_id=176385792 node_paths=PackedStringArray("countLabel", "applause")]
 script = ExtResource("1_dqi1o")
 dominoScene = ExtResource("2_v3785")
+countLabel = NodePath("Control/Label")
+applause = NodePath("AudioStreamPlayer2")
+
+[node name="Control" type="Control" parent="." unique_id=1645892263]
+layout_mode = 3
+anchor_right = 0.85200006
+anchor_bottom = 0.113000005
+offset_right = 0.49591064
+offset_bottom = -0.22400665
+
+[node name="Label" type="Label" parent="Control" unique_id=1886090445]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 3.7800002
+anchor_bottom = 1.3750001
+offset_right = -0.049987793
+offset_bottom = -32.000004
+theme_override_font_sizes/font_size = 35
+text = "Dominoes Remaining: "
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="." unique_id=2039942804]
+stream = ExtResource("3_khn0g")
+volume_db = -7.752

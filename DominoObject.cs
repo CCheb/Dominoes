@@ -38,6 +38,7 @@ public partial class DominoObject : StaticBody3D
     int currentXDegrees = 0;
 
     public bool falling = false;
+    private bool isFront = false;
 
     public List<Node3D> domino_list = new List<Node3D>();
 
@@ -401,17 +402,24 @@ public partial class DominoObject : StaticBody3D
     // collision functions 
     public void OnTopCollisionEnter(Node3D body)
     {
+        if(!get_front())
+        {
+            return;
+        }
         // check if its in group BULLET
         if (body.IsInGroup("BULLET"))
         {
             // emit signal with the value of the top face of the domino
             EmitSignal("DominoHit", top_value);
-            GD.Print("Sending" + top_value.ToString());
         }
     }
 
     public void OnBottomCollisionEnter(Node3D body)
     {
+        if (!get_front())
+        {
+            return;
+        }
         // check if its in group BULLET
         if (body.IsInGroup("BULLET"))
         {
@@ -447,6 +455,43 @@ public partial class DominoObject : StaticBody3D
             }
         }
         currentXDegrees = (int)Mathf.RadToDeg(Rotation.X);
+    }
+
+    public void set_front(bool value)
+    {
+        isFront = value;
+    }
+
+    public bool get_front()
+    {
+        return isFront;
+    }
+
+    // jump function to move the domino up and down in a wave pattern when filling in the line after some dominoes have fallen
+    public async void Jump()
+    {
+        Vector3 original_position = GlobalPosition;
+        Vector3 target_position = original_position + new Vector3(0, 0.5f, 0);
+        float jump_time = 0.5f;
+        float elapsed_time = 0f;
+        while (elapsed_time < jump_time)
+        {
+            elapsed_time += 0.01f;
+            float t = elapsed_time / jump_time;
+            Vector3 new_position = original_position + (target_position - original_position) * t;
+            GlobalPosition = new_position;
+            await ToSignal(GetTree().CreateTimer(0.01f), SceneTreeTimer.SignalName.Timeout);
+        }
+        // move back down
+        elapsed_time = 0f;
+        while (elapsed_time < jump_time)
+        {
+            elapsed_time += 0.01f;
+            float t = elapsed_time / jump_time;
+            Vector3 new_position = target_position + (original_position - target_position) * t;
+            GlobalPosition = new_position;
+            await ToSignal(GetTree().CreateTimer(0.01f), SceneTreeTimer.SignalName.Timeout);
+        }
     }
 
 

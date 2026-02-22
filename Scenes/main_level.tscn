@@ -1,6 +1,10 @@
 [gd_scene format=3 uid="uid://cd7u4h7bx4amn"]
 
 [ext_resource type="PackedScene" uid="uid://b3nnitio1tjw5" path="res://Scenes/bleachers.tscn" id="1_q2fht"]
+[ext_resource type="Script" uid="uid://csay5ffhn687" path="res://Scrips/Main.cs" id="1_qbrl8"]
+[ext_resource type="PackedScene" uid="uid://cttmv2fqhbg5i" path="res://Scenes/domino_line.tscn" id="2_ikcpc"]
+[ext_resource type="PackedScene" uid="uid://beyv0lwpslg8e" path="res://Scenes/player.tscn" id="3_5erdv"]
+[ext_resource type="AudioStream" uid="uid://bngmxgdtdx8ka" path="res://Assets/audio/wii-sports-knockoff.mp3" id="5_a2ia3"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6nngp"]
 albedo_color = Color(0.101960786, 0.34901962, 0, 1)
@@ -24,7 +28,80 @@ size = Vector3(0.2, 5, 19.8)
 [sub_resource type="BoxShape3D" id="BoxShape3D_bw3m6"]
 size = Vector3(0.2, 5, 50)
 
-[node name="Main_Level" type="Node3D" unique_id=1609260254]
+[node name="Main_Level" type="Node3D" unique_id=1609260254 node_paths=PackedStringArray("P1", "P2", "TransCamera1", "TransCamera2", "DominoLine1", "DominoLine2", "WinScreen", "WinLabel")]
+script = ExtResource("1_qbrl8")
+P1 = NodePath("Player")
+P2 = NodePath("Player2")
+TransCamera1 = NodePath("Camera3D")
+TransCamera2 = NodePath("Camera3D2")
+DominoLine1 = NodePath("DominoLine")
+DominoLine2 = NodePath("DominoLine2")
+WinScreen = NodePath("WinScreen")
+WinLabel = NodePath("WinScreen/ColorRect/MarginContainer/VBoxContainer/WinLabel")
+
+[node name="WinScreen" type="Control" parent="." unique_id=594397875]
+z_index = 50
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="WinScreen" unique_id=453922962]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.18431373, 0, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="WinScreen/ColorRect" unique_id=86350581]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 282.0
+offset_right = 1148.0
+offset_bottom = 365.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 400
+theme_override_constants/margin_right = 400
+
+[node name="VBoxContainer" type="VBoxContainer" parent="WinScreen/ColorRect/MarginContainer" unique_id=509763928]
+layout_mode = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="WinLabel" type="Label" parent="WinScreen/ColorRect/MarginContainer/VBoxContainer" unique_id=490817957]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "WINS!"
+horizontal_alignment = 1
+
+[node name="PlayAgainButton" type="Button" parent="WinScreen/ColorRect/MarginContainer/VBoxContainer" unique_id=730412422]
+z_index = 60
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Play Again"
+
+[node name="QuitButton" type="Button" parent="WinScreen/ColorRect/MarginContainer/VBoxContainer" unique_id=1709342531]
+z_index = 60
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Quit"
+
+[node name="Label" type="Label" parent="WinScreen/ColorRect/MarginContainer/VBoxContainer" unique_id=1410716940]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "
+
+
+
+*NOTE* 
+use arrow keys and space bar to 
+move and select between options"
+horizontal_alignment = 1
 
 [node name="Floor" type="StaticBody3D" parent="." unique_id=1594245601]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
@@ -78,8 +155,11 @@ mesh = SubResource("BoxMesh_6nngp")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/StaticBody3D4" unique_id=2053876617]
 shape = SubResource("BoxShape3D_bw3m6")
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=402384175]
-transform = Transform3D(1, 0, 0, 0, 0.6096334, 0.7926835, 0, -0.7926835, 0.6096334, 0, 10.660959, 9.207827)
+[node name="Camera3D2" type="Camera3D" parent="." unique_id=402384175]
+transform = Transform3D(0.33232987, -0.056497283, 0.94146967, 0.020825153, 0.9984005, 0.05256259, -0.9429333, 0.002138136, 0.33297485, 8.030037, 3.9811277, -4.023621)
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=56625118]
+transform = Transform3D(-0.31342876, 0.15825598, -0.9363318, -0.07934988, 0.97820234, 0.19189446, 0.9462907, 0.13444304, -0.2940392, -8.003505, 3.992144, 4.1266394)
 
 [node name="Bleachers" parent="." unique_id=2000577951 instance=ExtResource("1_q2fht")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.178856, 1, 0.02804184)
@@ -94,3 +174,74 @@ light_energy = 3.0
 [node name="DirectionalLight3D2" type="DirectionalLight3D" parent="." unique_id=88389519]
 transform = Transform3D(0.94476026, -0.18799663, 0.268487, 0, 0.81915206, 0.57357645, -0.3277621, -0.54189223, 0.7739023, 5.9136047, 43.786, 50.64)
 light_energy = 3.0
+
+[node name="DominoLine" parent="." unique_id=176385792 instance=ExtResource("2_ikcpc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8.018898)
+
+[node name="Label" parent="DominoLine/Control" parent_id_path=PackedInt32Array(176385792, 1645892263) index="0" unique_id=1886090445]
+anchor_right = 0.65000004
+anchor_bottom = 1.0
+offset_left = 88.0
+offset_top = 4.0
+offset_right = -10.300049
+offset_bottom = 25.0
+theme_override_colors/font_color = Color(0.23921569, 1, 1, 1)
+
+[node name="Label2" type="Label" parent="DominoLine/Control" parent_id_path=PackedInt32Array(176385792, 1645892263) index="1" unique_id=31143749]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.055000003
+anchor_right = 0.09
+anchor_bottom = 0.753
+offset_top = -0.015000343
+offset_right = -0.38000488
+offset_bottom = 0.03099823
+theme_override_colors/font_color = Color(0.23921569, 1, 1, 1)
+theme_override_font_sizes/font_size = 35
+text = "P1"
+horizontal_alignment = 1
+
+[node name="DominoLine2" parent="." unique_id=1628610804 instance=ExtResource("2_ikcpc")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 7.9720654)
+
+[node name="Label" parent="DominoLine2/Control" parent_id_path=PackedInt32Array(1628610804, 1645892263) index="0" unique_id=1886090445]
+anchor_left = 0.70500004
+anchor_right = 1.212
+anchor_bottom = 1.0
+offset_left = -0.3100586
+offset_top = 3.0
+offset_right = -0.18395996
+offset_bottom = -4.625
+theme_override_colors/font_color = Color(1, 0, 0.8862745, 1)
+
+[node name="Label2" type="Label" parent="DominoLine2/Control" parent_id_path=PackedInt32Array(1628610804, 1645892263) index="1" unique_id=311326939]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.043
+anchor_bottom = 0.671
+offset_left = 620.0
+offset_top = 4.0
+offset_right = 619.774
+offset_bottom = 5.0169983
+theme_override_colors/font_color = Color(1, 0, 0.8862745, 1)
+theme_override_font_sizes/font_size = 35
+text = "P2"
+horizontal_alignment = 1
+
+[node name="Player" parent="." unique_id=388203353 instance=ExtResource("3_5erdv")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -7)
+
+[node name="Player2" parent="." unique_id=604332174 instance=ExtResource("3_5erdv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1719741882]
+stream = ExtResource("5_a2ia3")
+volume_db = -16.795
+autoplay = true
+parameters/looping = true
+
+[connection signal="pressed" from="WinScreen/ColorRect/MarginContainer/VBoxContainer/PlayAgainButton" to="." method="OnPlayAgainButtonPressed"]
+[connection signal="pressed" from="WinScreen/ColorRect/MarginContainer/VBoxContainer/QuitButton" to="." method="OnQuitButtonPressed"]
+
+[editable path="DominoLine"]
+[editable path="DominoLine2"]
