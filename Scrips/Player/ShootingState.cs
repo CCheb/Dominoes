@@ -4,7 +4,8 @@ using System.ComponentModel;
 using System.Threading.Tasks;
 
 public partial class ShootingState : State
-{
+{   
+    [Signal] public delegate void ShootingResultEventHandler(string result);
     [Export] private CameraController cameraController;
     [Export] private Crosshair crosshair;
     [Export] private AudioStreamPlayer3D gunSound;
@@ -26,7 +27,15 @@ public partial class ShootingState : State
         Godot.Collections.Dictionary collisionResult = CalculateRay();
 
         if(collisionResult.Count != 0)
+        {
             SpawnDecal((Vector3)collisionResult["position"]);
+            Node collider = (Node)collisionResult["collider"];
+            if(collider.GetParent().IsInGroup("DOMINO"))
+                EmitSignalShootingResult("Hit");
+            else
+                EmitSignalShootingResult("Miss");
+            
+        }
 
         // TODO: Play firing animations/sounds here
         gunSound.Play();
