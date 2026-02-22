@@ -6,9 +6,3 @@
 [node name="DominoLine" type="Node3D" unique_id=176385792]
 script = ExtResource("1_dqi1o")
 dominoScene = ExtResource("2_v3785")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2126175758]
-transform = Transform3D(1, 0, 0, 0, 0.2591394, 0.9658399, 0, -0.9658399, 0.2591394, 0, 46.104603, 0)
-
-[node name="Camera3D" type="Camera3D" parent="." unique_id=1206031255]
-transform = Transform3D(1, 0, 0, 0, 0.92707264, 0.37488168, 0, -0.37488168, 0.92707264, 1.4347291, 3.8777103, 5.2197313)

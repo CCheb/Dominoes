@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c5t4i1vnlrwx2"]
 
-[ext_resource type="Script" uid="uid://bu24dr8knlfgk" path="res://Scrips/Player/TestDecal.cs" id="1_wqful"]
+[ext_resource type="Script" uid="uid://c55t2wckn8h57" path="res://Scrips/Player/TestDecal.cs" id="1_wqful"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1yiuw"]
 albedo_color = Color(0.7996229, 0, 0.084064834, 1)
@@ -9,8 +9,16 @@ albedo_color = Color(0.7996229, 0, 0.084064834, 1)
 material = SubResource("StandardMaterial3D_1yiuw")
 size = Vector3(0.05, 0.05, 0.05)
 
-[node name="TestDecal" type="Node3D" unique_id=89611240]
+[sub_resource type="BoxShape3D" id="BoxShape3D_wqful"]
+size = Vector3(0.06, 0.06, 0.06)
+
+[node name="TestDecal" type="Node3D" unique_id=89611240 groups=["BULLET"]]
 script = ExtResource("1_wqful")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1971851441]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1971851441 groups=["BULLET"]]
 mesh = SubResource("BoxMesh_wqful")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1028586300 groups=["BULLET"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=199488984 groups=["BULLET"]]
+shape = SubResource("BoxShape3D_wqful")

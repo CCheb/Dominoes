@@ -38,7 +38,6 @@ public partial class DominoObject : StaticBody3D
     int currentXDegrees = 0;
 
     public bool falling = false;
-    public bool isPreRotated = false;
 
     public List<Node3D> domino_list = new List<Node3D>();
 
@@ -397,8 +396,6 @@ public partial class DominoObject : StaticBody3D
         t = t.Translated(pivot);
         domino01.Transform = t;
 
-        // set isPreRotated to true so that the domino's collisions aren't mixed up
-        isPreRotated = true;
     }
 
     // collision functions 
@@ -407,14 +404,9 @@ public partial class DominoObject : StaticBody3D
         // check if its in group BULLET
         if (body.IsInGroup("BULLET"))
         {
-            if(isPreRotated)
-            {
-                // if the domino is pre-rotated then the top and bottom values are switched
-                EmitSignal("DominoHit", bottom_value);
-                return;
-            }
             // emit signal with the value of the top face of the domino
             EmitSignal("DominoHit", top_value);
+            GD.Print("Sending" + top_value.ToString());
         }
     }
 
@@ -423,14 +415,9 @@ public partial class DominoObject : StaticBody3D
         // check if its in group BULLET
         if (body.IsInGroup("BULLET"))
         {
-            if(isPreRotated)
-            {
-                // if the domino is pre-rotated then the top and bottom values are switched
-                EmitSignal("DominoHit", top_value);
-                return;
-            }
             // emit signal with the value of the bottom face of the domino
             EmitSignal("DominoHit", bottom_value);
+            GD.Print("Sending" + bottom_value.ToString());
         }
     }
 

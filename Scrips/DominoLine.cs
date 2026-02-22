@@ -82,13 +82,20 @@ public partial class DominoLine : Node3D
       domino.Connect("DominoHit", new Callable(this, "OnDominoHit"));
     }
 
-
-    // TEST DOMINO HIT
-    OnDominoHit(5);
   }
 
   public async void OnDominoHit(int value)
   {
+    // CHECK IF VALUE IS 0 TO AVOID UNNECESSARY CALCULATIONS
+    if (value == 0)    {
+      return;
+    }
+    // CHECK IF VALUE IS GREATER THAN THE NUMBER OF DOMINOES REMAINING TO AVOID ERRORS
+    if (value > dominoesRemaining)
+    {
+      value = dominoesRemaining;
+    }
+
     // value recieved is the number of dominoes that will fall
     // so from the start of the line, call domino_die for value amount of dominoes
     // BEFORE THIS, we need to get positions of all dominoes so that the next dominoes in line can fill in
@@ -114,7 +121,6 @@ public partial class DominoLine : Node3D
     // first, trigger the dies with small delays between them
     for (int i = 0; i < value; i++)
     {
-      GD.Print("Killing domino " + i);
       dominoes[i].Call("domino_die");
       // small delay before triggering the next to fall
       if (i < value - 1)
@@ -137,11 +143,9 @@ public partial class DominoLine : Node3D
 
   public void FillInLine(Vector3[] positions, Vector3[] rotations, int value)
   {
-    GD.Print("Filling in line with " + value + " dominoes");
     // starting from the beginning of the remaining line, move each domino to the position and rotation of the domino that just fell
     for (int i = 0; i < dominoesRemaining; i++)
     {
-      GD.Print("Moving domino " + i + " to position " + positions[i] + " and rotation " + rotations[i]);
       dominoes[i].GlobalPosition = positions[i];
       dominoes[i].GlobalRotation = rotations[i];
     }
