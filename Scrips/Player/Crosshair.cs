@@ -10,6 +10,8 @@ public partial class Crosshair : Control
     [Export] private Color CrosshairColor = Colors.Red;
     [Export] private int Segments = 64;
    
+    private float maxRadius = 130f;
+    private float minRadius = 20f;
     private SinePatterns sinePattern;
     private float xOffset  = 0.0f;
     private float yValue = 0.0f;
@@ -44,6 +46,9 @@ public partial class Crosshair : Control
         sinePattern.SetCurrentPattern(SinePatterns.Patterns.RegularSine);
         Position = basePosition;
         yValue = xOffset = 0.0f;
+        maxRadius = (float)GD.RandRange(110f, 140f);
+        minRadius = (float)GD.RandRange(20f, 30f);
+        
         //direction = GD.Randf() < 0.5f ? -1 : 1;
         stopped = false;
         Visible = false;
@@ -57,6 +62,7 @@ public partial class Crosshair : Control
     public void RequestPatternLoad(SinePatterns.Patterns newPattern)
     {   
         sinePattern.SetCurrentPattern(newPattern);
+        sinePattern.RandomizeValues();
         Visible = true;
     }
 
@@ -81,9 +87,9 @@ public partial class Crosshair : Control
 
     private void CrosshairGrowShrink()
     {
-        if(Radius >= 90)
+        if(Radius >= maxRadius)
             increment = false;
-        else if(Radius <= 30)
+        else if(Radius <= minRadius)
             increment = true;
         
 
