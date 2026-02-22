@@ -6,6 +6,13 @@ public partial class PlayerStateMachine : Node
     [Export] private State currentState;
     private Godot.Collections.Dictionary<string, State> states = [];
 
+    [Export] public bool AcceptingInput = true;
+
+    public void SetAcceptingInput(bool value)
+    {
+        AcceptingInput = value;
+    }
+
     public async override void _Ready()
     {
         base._Ready();
@@ -39,7 +46,8 @@ public partial class PlayerStateMachine : Node
     public override void _Process(double delta)
     {
         base._Process(delta);
-        currentState.Update(delta);
+        if (AcceptingInput && currentState != null)
+            currentState.Update(delta);
     }
 
     public void OnChildTransition(string newStateName)

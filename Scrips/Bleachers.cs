@@ -30,4 +30,19 @@ public partial class Bleachers : StaticBody3D
       }
     }
   }
+
+  public async void DominoesHop()
+  {
+    // for all children of bleachers in group DOMINO
+    foreach (Node domino in GetChildren())
+    {
+      if (domino.IsInGroup("DOMINO"))
+      {
+        // call domino's hop method
+        domino.Call("Jump");
+        // wait a short amount of time before hopping the next one to create a wave effect
+        await ToSignal(GetTree().CreateTimer(0.1f), SceneTreeTimer.SignalName.Timeout);
+      }
+    }
+  }
 }

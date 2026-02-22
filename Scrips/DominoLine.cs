@@ -10,6 +10,10 @@ public partial class DominoLine : Node3D
   [Export] public PackedScene dominoScene;
   [Export] public int dominoesRemaining;
 
+  [Export] public Label countLabel;
+
+  [Export] public AudioStreamPlayer applause;
+
   [Export] public float spacing = 1.5f;
 
   // number of dominoes before changing direction in the snake pattern
@@ -20,8 +24,18 @@ public partial class DominoLine : Node3D
 
   public Vector3 startPosition;
 
+  private bool isAboutToGetHit = false;
+
   // we want a list of dominoes to keep track of them
   public List<StaticBody3D> dominoes = new List<StaticBody3D>();
+
+  // signal to emit if all dominoes are down
+  [Signal]
+  public delegate void DominoesDownEventHandler();
+
+  // signal to emit the number value of the domino face that was hit
+  [Signal]
+  public delegate void DominoWasHitEventHandler();
 
   public override void _Ready()
   {
@@ -30,6 +44,7 @@ public partial class DominoLine : Node3D
     startPosition = GlobalPosition;
     // set dominoes remaining to max dominoes at the start
     dominoesRemaining = maxDominoes;
+    UpdateCountLabel();
     // spawn dominoes
     for (int i = 0; i < maxDominoes; i++)
     {
@@ -41,6 +56,7 @@ public partial class DominoLine : Node3D
         // first domino unchanged
         domino.GlobalPosition = startPosition;
         domino.GlobalRotation = GlobalRotation;
+        domino.Call("set_front", true);
       }
       else
       {
@@ -86,8 +102,16 @@ public partial class DominoLine : Node3D
 
   public async void OnDominoHit(int value)
   {
+    if(!isAboutToGetHit)
+    {
+      // if the line is not supposed to get hit, ignore signal
+      return;
+    }
+    // emit signal to trigger camera transition
+    EmitSignal("DominoWasHit");
     // CHECK IF VALUE IS 0 TO AVOID UNNECESSARY CALCULATIONS
-    if (value == 0)    {
+    if (value == 0)
+    {
       return;
     }
     // CHECK IF VALUE IS GREATER THAN THE NUMBER OF DOMINOES REMAINING TO AVOID ERRORS
@@ -95,6 +119,8 @@ public partial class DominoLine : Node3D
     {
       value = dominoesRemaining;
     }
+
+    applause.Play();
 
     // value recieved is the number of dominoes that will fall
     // so from the start of the line, call domino_die for value amount of dominoes
@@ -112,6 +138,12 @@ public partial class DominoLine : Node3D
     KillDominoes(value);
     // wait a short time to allow dominoes to fall before filling in the line
     await ToSignal(GetTree().CreateTimer(3f), "timeout");
+    // if all dominoes are down, emit signal to trigger win condition
+    if (dominoesRemaining <= 0)
+    {
+      EmitSignal("DominoesDown");
+      return;
+    }
     // fill in the line with the next dominoes in line
     FillInLine(positions, rotations, value);
   }
@@ -138,6 +170,7 @@ public partial class DominoLine : Node3D
       dominoes.RemoveAt(0);
       temp.QueueFree();
       dominoesRemaining--;
+      UpdateCountLabel();
     }
   }
 
@@ -149,7 +182,24 @@ public partial class DominoLine : Node3D
       dominoes[i].GlobalPosition = positions[i];
       dominoes[i].GlobalRotation = rotations[i];
     }
+    dominoes[0].Call("set_front", true);
+  }
+
+  public void UpdateCountLabel()
+  {
+    countLabel.Text = "Dominoes Remaining: " + dominoesRemaining.ToString();
+  }
+
+  public void SetIsAboutToGetHit(bool value)
+  {
+    isAboutToGetHit = value;
+  }
+  
+  public bool GetIsAboutToGetHit()
+  {
+    return isAboutToGetHit;
   }
 }
+
 
 
