@@ -1,50 +1,67 @@
-[gd_scene load_steps=9 format=3 uid="uid://ie1ltkn2ji5i"]
+[gd_scene format=3 uid="uid://ie1ltkn2ji5i"]
 
-[ext_resource type="Script" uid="uid://dhdkrcor4ndd5" path="res://Scenes/HelpScreen.cs" id="1_ag0tr"]
-[ext_resource type="Script" uid="uid://b0hdotgceqmml" path="res://Scrips/CamPivot.cs" id="1_q6s0c"]
+[ext_resource type="Script" uid="uid://hucvrajaf5bb" path="res://Scenes/HelpScreen.cs" id="1_ag0tr"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_73icc"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6nngp"]
 albedo_color = Color(0.101960786, 0.34901962, 0, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_q6s0c"]
-material = SubResource("StandardMaterial3D_73icc")
+material = SubResource("StandardMaterial3D_6nngp")
 size = Vector2(1, 1)
 
 [sub_resource type="HeightMapShape3D" id="HeightMapShape3D_ag0tr"]
+map_width = 4
+map_depth = 4
+map_data = PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7iiir"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bw3m6"]
 albedo_color = Color(0.20086536, 0.086976744, 0.018943096, 1)
 
-[sub_resource type="BoxMesh" id="BoxMesh_3mbpc"]
-material = SubResource("StandardMaterial3D_7iiir")
+[sub_resource type="BoxMesh" id="BoxMesh_7iiir"]
+material = SubResource("StandardMaterial3D_bw3m6")
 size = Vector3(0.2, 5, 19.8)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_jks8t"]
-size = Vector3(0.2, 5, 19)
+[sub_resource type="BoxShape3D" id="BoxShape3D_3mbpc"]
+size = Vector3(0.2, 5, 50)
 
-[node name="HelpScreen" type="Node3D" node_paths=PackedStringArray("back")]
+[sub_resource type="Environment" id="Environment_jks8t"]
+background_mode = 1
+background_color = Color(0.38760868, 0.7448859, 1, 1)
+
+[node name="HelpScreen" type="Node3D" unique_id=1479224415 node_paths=PackedStringArray("back")]
 script = ExtResource("1_ag0tr")
 back = NodePath("UI/Back")
 
-[node name="UI" type="Control" parent="."]
+[node name="UI" type="Control" parent="." unique_id=330345019]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="UI"]
+[node name="RichTextLabel" type="RichTextLabel" parent="UI" unique_id=509382018]
 layout_mode = 0
-offset_left = 400.0
-offset_top = 200.0
-offset_right = 700.0
-offset_bottom = 500.0
-text = "We spinning
+offset_left = 170.0
+offset_top = 66.0
+offset_right = 1091.0
+offset_bottom = 447.0
+text = "
+How to PLAY:
 
-WOOOOOOOOOOO"
+Hold down left-click on your mouse
+Release left-click to fire
+
+
+
+The domino will present 2 numbers, each number corresponds with the amount of dominos that will fall when shot
+
+
+Your goal is to knock down all of your opponents dominos first to win!
+
+
+GOOD LUCK!"
 horizontal_alignment = 1
-vertical_alignment = 1
 
-[node name="Back" type="Button" parent="UI"]
+[node name="Back" type="Button" parent="UI" unique_id=2119762033]
 layout_mode = 0
 anchor_left = 0.95
 anchor_top = 14.55
@@ -53,59 +70,42 @@ anchor_bottom = 15.325
 text = "Back to Start screen"
 metadata/_edit_use_anchors_ = true
 
-[node name="Scenery" type="Node3D" parent="."]
+[node name="Scenery" type="Node3D" parent="." unique_id=852753053]
 
-[node name="Floor" type="StaticBody3D" parent="Scenery"]
+[node name="Floor" type="StaticBody3D" parent="Scenery" unique_id=361170048]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Scenery/Floor"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Scenery/Floor" unique_id=996669577]
+transform = Transform3D(2.5, 0, 0, 0, 1, 0, 0, 0, 2.574, 0, 0, 0)
 mesh = SubResource("PlaneMesh_q6s0c")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Scenery/Floor"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Scenery/Floor" unique_id=13476016]
 shape = SubResource("HeightMapShape3D_ag0tr")
 
-[node name="Walls" type="Node3D" parent="Scenery"]
+[node name="Walls" type="Node3D" parent="Scenery" unique_id=1845515592]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Scenery/Walls"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 2.5, 0)
+[node name="StaticBody3D4" type="StaticBody3D" parent="Scenery/Walls" unique_id=856753804]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 2.5, -24.406075)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Scenery/Walls/StaticBody3D"]
-mesh = SubResource("BoxMesh_3mbpc")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Scenery/Walls/StaticBody3D4" unique_id=289858337]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 2.6, -18.405867, 0, -8.04546e-07)
+mesh = SubResource("BoxMesh_7iiir")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Scenery/Walls/StaticBody3D"]
-shape = SubResource("BoxShape3D_jks8t")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Scenery/Walls/StaticBody3D4" unique_id=1764215469]
+shape = SubResource("BoxShape3D_3mbpc")
 
-[node name="StaticBody3D2" type="StaticBody3D" parent="Scenery/Walls"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 2.5, 0)
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1851423803]
+transform = Transform3D(0.9445312, -0.18837488, -0.2690272, 1.0991861e-08, -0.81915206, 0.57357645, -0.3284216, -0.54176086, -0.77371466, -6.082574, 43.785538, -50.466343)
+light_energy = 3.0
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Scenery/Walls/StaticBody3D2"]
-mesh = SubResource("BoxMesh_3mbpc")
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="." unique_id=779063896]
+transform = Transform3D(0.94476026, -0.18799663, 0.268487, 0, 0.81915206, 0.57357645, -0.3277621, -0.54189223, 0.7739023, 5.9136047, 43.786, 50.64)
+light_energy = 3.0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Scenery/Walls/StaticBody3D2"]
-shape = SubResource("BoxShape3D_jks8t")
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1841107151]
+environment = SubResource("Environment_jks8t")
 
-[node name="StaticBody3D3" type="StaticBody3D" parent="Scenery/Walls"]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 2.5, 10)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Scenery/Walls/StaticBody3D3"]
-mesh = SubResource("BoxMesh_3mbpc")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Scenery/Walls/StaticBody3D3"]
-shape = SubResource("BoxShape3D_jks8t")
-
-[node name="StaticBody3D4" type="StaticBody3D" parent="Scenery/Walls"]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 2.5, -10)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Scenery/Walls/StaticBody3D4"]
-mesh = SubResource("BoxMesh_3mbpc")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Scenery/Walls/StaticBody3D4"]
-shape = SubResource("BoxShape3D_jks8t")
-
-[node name="Cam_Pivot" type="Node3D" parent="."]
-script = ExtResource("1_q6s0c")
-
-[node name="Camera3D" type="Camera3D" parent="Cam_Pivot"]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 2, 0)
+[node name="Camera3D" type="Camera3D" parent="." unique_id=836904338]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4851389, 0)
 
 [connection signal="pressed" from="UI/Back" to="." method="_on_back_pressed"]
