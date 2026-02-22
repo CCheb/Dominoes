@@ -7,7 +7,7 @@ public partial class Crosshair : Control
     [ExportGroup("Crosshair Settings")]
 	[Export] public float Radius = 20f;
     [Export] private float Thickness = 2f;
-    [Export] private Color CrosshairColor = Colors.White;
+    [Export] private Color CrosshairColor = Colors.Red;
     [Export] private int Segments = 64;
    
     private SinePatterns sinePattern;

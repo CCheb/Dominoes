@@ -27,11 +27,24 @@ public partial class Main : Node3D
         // connect signals for when all dominoes are down to trigger win screens
         DominoLine1.Connect("DominoesDown", new Callable(this, "Domino1LineDown"));
         DominoLine2.Connect("DominoesDown", new Callable(this, "Domino2LineDown"));
+
+        P1.GetNode<ShootingState>("PlayerStateMachine/ShootingState").ShootingResult += ProcessShootingResult;
+    }
+
+    private void ProcessShootingResult(string result)
+    {
+        if(result == "Miss")
+            GD.Print("miss!");
+        else
+            GD.Print("hit!!");
     }
 
     public void SetP1Turn()
-    {
+    {  
+        P1.GetNode<Control>("Control").Visible = true;
         P1.Visible = true;
+
+        P2.GetNode<Control>("Control").Visible = false;
         P2.Visible = false;
         // Set current camera to player 1's camera (path CameraController - Camera3D)
         P1.GetNode<Camera3D>("CameraController/Camera3D").Current = true;
@@ -41,7 +54,11 @@ public partial class Main : Node3D
     }
     public void SetP2Turn()
     {
+
+        P1.GetNode<Control>("Control").Visible = false;
         P1.Visible = false;
+
+        P2.GetNode<Control>("Control").Visible = true;
         P2.Visible = true;
         // Set current camera to player 2's camera (path CameraController - Camera3D)
         P2.GetNode<Camera3D>("CameraController/Camera3D").Current = true;

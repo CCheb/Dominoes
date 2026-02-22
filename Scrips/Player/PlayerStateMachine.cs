@@ -44,7 +44,7 @@ public partial class PlayerStateMachine : Node
     }
 
     public override void _Process(double delta)
-    {
+    { 
         base._Process(delta);
         if (AcceptingInput && currentState != null)
             currentState.Update(delta);
