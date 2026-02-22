@@ -24,40 +24,23 @@ public partial class Main : Node3D
         SetP1Turn();
 
         // connect signals from domino lines to trigger camera transitions
-        DominoLine1.Connect("DominoWasHit", new Callable(this, "TriggerTransitionCamera2"));
-        DominoLine2.Connect("DominoWasHit", new Callable(this, "TriggerTransitionCamera1"));
+        P2.GetNode<ShootingState>("PlayerStateMachine/ShootingState").Connect("DominoWasHit", new Callable(this, "TriggerTransitionCamera2"));
+        P1.GetNode<ShootingState>("PlayerStateMachine/ShootingState").Connect("DominoWasHit", new Callable(this, "TriggerTransitionCamera1"));
         // connect signals for when all dominoes are down to trigger win screens
         DominoLine1.Connect("DominoesDown", new Callable(this, "Domino1LineDown"));
         DominoLine2.Connect("DominoesDown", new Callable(this, "Domino2LineDown"));
-
-        P1.GetNode<ShootingState>("PlayerStateMachine/ShootingState").ShootingResult += ProcessShootingResult;
     }
 
-    private void ProcessShootingResult(string result)
-    {
-        if(result == "Miss"){
-            GD.Print("miss!");
-        
-        /* This fix allows turn switching upon missing, however P2's camera breaks
-            if (isP1Turn)
-            {
-                TriggerTransitionCamera1();
-            }
-            else
-            {
-                TriggerTransitionCamera2();
-            }
-        */
-        }
-        else
-            GD.Print("hit!!");
-    }
+
 
     public void SetP1Turn()
     {  
         isP1Turn = true;
         P1.GetNode<Control>("Control").Visible = true;
         P1.Visible = true;
+
+        var p2State = P2.GetNodeOrNull<PlayerStateMachine>("PlayerStateMachine");
+        if (p2State != null) p2State.SetAcceptingInput(false);
 
         P2.GetNode<Control>("Control").Visible = false;
         P2.Visible = false;
@@ -73,6 +56,9 @@ public partial class Main : Node3D
         P1.GetNode<Control>("Control").Visible = false;
         P1.Visible = false;
 
+        var p1State = P1.GetNodeOrNull<PlayerStateMachine>("PlayerStateMachine");
+        if (p1State != null) p1State.SetAcceptingInput(false);
+        
         P2.GetNode<Control>("Control").Visible = true;
         P2.Visible = true;
         // Set current camera to player 2's camera (path CameraController - Camera3D)
@@ -83,6 +69,8 @@ public partial class Main : Node3D
     }
     public async void TriggerTransitionCamera1()
     {
+        if(!isP1Turn)
+            return;
         // stop clicks from triggering shooting state while in transition
         var p1State = P1.GetNodeOrNull<PlayerStateMachine>("PlayerStateMachine");
         var p2State = P2.GetNodeOrNull<PlayerStateMachine>("PlayerStateMachine");
@@ -104,6 +92,8 @@ public partial class Main : Node3D
     }
     public async void TriggerTransitionCamera2()
     {
+        if(isP1Turn)
+            return;
         var p1State = P1.GetNodeOrNull<PlayerStateMachine>("PlayerStateMachine");
         var p2State = P2.GetNodeOrNull<PlayerStateMachine>("PlayerStateMachine");
         if (p1State != null) p1State.SetAcceptingInput(false);
