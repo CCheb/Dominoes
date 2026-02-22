@@ -28,6 +28,10 @@ size = Vector3(0.2, 5, 19.8)
 [sub_resource type="BoxShape3D" id="BoxShape3D_bw3m6"]
 size = Vector3(0.2, 5, 50)
 
+[sub_resource type="Environment" id="Environment_a2ia3"]
+background_mode = 1
+background_color = Color(0.38760868, 0.7448859, 1, 1)
+
 [node name="Main_Level" type="Node3D" unique_id=1609260254 node_paths=PackedStringArray("P1", "P2", "TransCamera1", "TransCamera2", "DominoLine1", "DominoLine2", "WinScreen", "WinLabel")]
 script = ExtResource("1_qbrl8")
 P1 = NodePath("Player")
@@ -201,6 +205,9 @@ theme_override_font_sizes/font_size = 35
 text = "P1"
 horizontal_alignment = 1
 
+[node name="SpotLight3D" parent="DominoLine" index="2" unique_id=1987336855]
+light_color = Color(0, 1, 1, 1)
+
 [node name="DominoLine2" parent="." unique_id=1628610804 instance=ExtResource("2_ikcpc")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 7.9720654)
 
@@ -228,6 +235,9 @@ theme_override_font_sizes/font_size = 35
 text = "P2"
 horizontal_alignment = 1
 
+[node name="SpotLight3D" parent="DominoLine2" index="2" unique_id=1987336855]
+light_color = Color(1, 0, 1, 1)
+
 [node name="Player" parent="." unique_id=388203353 instance=ExtResource("3_5erdv")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -7)
 
@@ -239,6 +249,9 @@ stream = ExtResource("5_a2ia3")
 volume_db = -16.795
 autoplay = true
 parameters/looping = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=881353702]
+environment = SubResource("Environment_a2ia3")
 
 [connection signal="pressed" from="WinScreen/ColorRect/MarginContainer/VBoxContainer/PlayAgainButton" to="." method="OnPlayAgainButtonPressed"]
 [connection signal="pressed" from="WinScreen/ColorRect/MarginContainer/VBoxContainer/QuitButton" to="." method="OnQuitButtonPressed"]
