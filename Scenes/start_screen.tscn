@@ -1,7 +1,7 @@
-[gd_scene format=3 uid="uid://dofqovxjmjuvt"]
+[gd_scene load_steps=11 format=3 uid="uid://dofqovxjmjuvt"]
 
-[ext_resource type="Script" uid="uid://cge28wj2cyhwy" path="res://Scrips/StartScreen.cs" id="1_ainjc"]
-[ext_resource type="Script" uid="uid://b0hdotgceqmml" path="res://Scrips/CamPivot.cs" id="1_i8r30"]
+[ext_resource type="Script" uid="uid://sapw50mfvsis" path="res://Scrips/StartScreen.cs" id="1_ainjc"]
+[ext_resource type="Script" uid="uid://blpsvn37sh7kk" path="res://Scrips/CamPivot.cs" id="1_i8r30"]
 [ext_resource type="PackedScene" uid="uid://b3nnitio1tjw5" path="res://Scenes/bleachers.tscn" id="3_mtlf8"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_60ddj"]
@@ -30,13 +30,13 @@ size = Vector3(0.2, 5, 50)
 background_mode = 1
 background_color = Color(0.38760868, 0.7448859, 1, 1)
 
-[node name="Start_Screen" type="Node3D" unique_id=266808935 node_paths=PackedStringArray("start", "help", "secret")]
+[node name="Start_Screen" type="Node3D" node_paths=PackedStringArray("start", "help", "secret")]
 script = ExtResource("1_ainjc")
 start = NodePath("UI/Start")
 help = NodePath("UI/Help")
 secret = NodePath("UI/Secret")
 
-[node name="UI" type="Control" parent="." unique_id=1271194088]
+[node name="UI" type="Control" parent="."]
 layout_mode = 3
 anchor_left = 0.1736111
 anchor_top = 0.12345679
@@ -44,7 +44,7 @@ anchor_right = 0.8680556
 anchor_bottom = 0.89506173
 metadata/_edit_use_anchors_ = true
 
-[node name="Start" type="Button" parent="UI" unique_id=1543943910]
+[node name="Start" type="Button" parent="UI"]
 layout_mode = 0
 anchor_left = 0.4125
 anchor_top = 0.5
@@ -55,7 +55,7 @@ theme_override_font_sizes/font_size = 20
 text = "Start game"
 metadata/_edit_use_anchors_ = true
 
-[node name="Help" type="Button" parent="UI" unique_id=1258952467]
+[node name="Help" type="Button" parent="UI"]
 layout_mode = 0
 anchor_left = 0.4125
 anchor_top = 0.654
@@ -66,7 +66,7 @@ theme_override_font_sizes/font_size = 20
 text = "Help"
 metadata/_edit_use_anchors_ = true
 
-[node name="Secret" type="Button" parent="UI" unique_id=905574233]
+[node name="Secret" type="Button" parent="UI"]
 layout_mode = 0
 anchor_left = 0.0125
 anchor_top = 0.92
@@ -76,7 +76,7 @@ theme_override_font_sizes/font_size = 10
 text = "Do NOT Push"
 metadata/_edit_use_anchors_ = true
 
-[node name="RichTextLabel" type="RichTextLabel" parent="UI" unique_id=1849732991]
+[node name="RichTextLabel" type="RichTextLabel" parent="UI"]
 layout_mode = 0
 anchor_left = 0.325
 anchor_top = 0.16
@@ -89,81 +89,98 @@ horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Scenery" type="Node3D" parent="." unique_id=438421978]
+[node name="Credits" type="RichTextLabel" parent="UI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.64900005
+anchor_top = 0.57600003
+anchor_right = 1.146
+anchor_bottom = 1.09
+offset_left = -0.2000122
+offset_top = -88.00003
+offset_right = 0.19995117
+text = "Assets used 
+Dominos model - 
+Background music - 
+Cheers - 
+Gunshot sound - https://pixabay.com/sound-effects/film-special-effects-gun-shots-from-a-distance-7-96391/
+Rifle Model - https://sketchfab.com/3d-models/rifle-awp-weapon-model-cs2-23ad3d7fb46b40e59cab7937654e2691"
 
-[node name="Floor" type="StaticBody3D" parent="Scenery" unique_id=1324649437]
+[node name="Scenery" type="Node3D" parent="."]
+
+[node name="Floor" type="StaticBody3D" parent="Scenery"]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Scenery/Floor" unique_id=475730063]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Scenery/Floor"]
 transform = Transform3D(2.5, 0, 0, 0, 1, 0, 0, 0, 2.574, 0, 0, 0)
 mesh = SubResource("PlaneMesh_5e717")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Scenery/Floor" unique_id=1206780770]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Scenery/Floor"]
 shape = SubResource("HeightMapShape3D_mtlf8")
 
-[node name="Walls" type="Node3D" parent="Scenery" unique_id=1885632332]
+[node name="Walls" type="Node3D" parent="Scenery"]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Scenery/Walls" unique_id=1317774686]
+[node name="StaticBody3D" type="StaticBody3D" parent="Scenery/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.020914, 2.5, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Scenery/Walls/StaticBody3D" unique_id=495446675]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Scenery/Walls/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 2.4578753, 0, 0, 0)
 mesh = SubResource("BoxMesh_nqnrp")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Scenery/Walls/StaticBody3D" unique_id=1935049287]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Scenery/Walls/StaticBody3D"]
 shape = SubResource("BoxShape3D_5a7ho")
 
-[node name="StaticBody3D2" type="StaticBody3D" parent="Scenery/Walls" unique_id=1451046355]
+[node name="StaticBody3D2" type="StaticBody3D" parent="Scenery/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.020914, 2.5, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Scenery/Walls/StaticBody3D2" unique_id=1269355358]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Scenery/Walls/StaticBody3D2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 2.4640613, 0, 0, 0)
 mesh = SubResource("BoxMesh_nqnrp")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Scenery/Walls/StaticBody3D2" unique_id=1442276086]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Scenery/Walls/StaticBody3D2"]
 shape = SubResource("BoxShape3D_5a7ho")
 
-[node name="StaticBody3D3" type="StaticBody3D" parent="Scenery/Walls" unique_id=350337713]
+[node name="StaticBody3D3" type="StaticBody3D" parent="Scenery/Walls"]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 2.5, 24.485558)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Scenery/Walls/StaticBody3D3" unique_id=192208485]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Scenery/Walls/StaticBody3D3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 2.6, 0, 0, 0)
 mesh = SubResource("BoxMesh_nqnrp")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Scenery/Walls/StaticBody3D3" unique_id=851817744]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Scenery/Walls/StaticBody3D3"]
 shape = SubResource("BoxShape3D_5a7ho")
 
-[node name="StaticBody3D4" type="StaticBody3D" parent="Scenery/Walls" unique_id=1749755199]
+[node name="StaticBody3D4" type="StaticBody3D" parent="Scenery/Walls"]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 2.5, -24.406075)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Scenery/Walls/StaticBody3D4" unique_id=874628701]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Scenery/Walls/StaticBody3D4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 2.6, 0, 0, 0)
 mesh = SubResource("BoxMesh_nqnrp")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Scenery/Walls/StaticBody3D4" unique_id=893852789]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Scenery/Walls/StaticBody3D4"]
 shape = SubResource("BoxShape3D_5a7ho")
 
-[node name="Cam_Pivot" type="Node3D" parent="." unique_id=612962459]
+[node name="Cam_Pivot" type="Node3D" parent="."]
 script = ExtResource("1_i8r30")
 
-[node name="Camera3D" type="Camera3D" parent="Cam_Pivot" unique_id=2048214097]
+[node name="Camera3D" type="Camera3D" parent="Cam_Pivot"]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 2, 0)
 
-[node name="Bleachers" parent="." unique_id=2000577951 instance=ExtResource("3_mtlf8")]
+[node name="Bleachers" parent="." instance=ExtResource("3_mtlf8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.178856, 1, 0.02804184)
 
-[node name="Bleachers2" parent="." unique_id=851657996 instance=ExtResource("3_mtlf8")]
+[node name="Bleachers2" parent="." instance=ExtResource("3_mtlf8")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 19.23023, 0.056329876, -0.44407654)
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1639587228]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.9445312, -0.18837488, -0.2690272, 1.0991861e-08, -0.81915206, 0.57357645, -0.3284216, -0.54176086, -0.77371466, -6.082574, 43.785538, -50.466343)
 light_energy = 3.0
 
-[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="." unique_id=1663497501]
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.94476026, -0.18799663, 0.268487, 0, 0.81915206, 0.57357645, -0.3277621, -0.54189223, 0.7739023, 5.9136047, 43.786, 50.64)
 light_energy = 3.0
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=756438996]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ssogg")
 
 [connection signal="pressed" from="UI/Start" to="." method="_on_start_pressed"]
